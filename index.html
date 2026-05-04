@@ -1,1402 +1,2598 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Amit Kumar Gupta — Backend Developer. Laravel · PHP · Fintech · SaaS.">
-<title>Amit Kumar Gupta | Backend Developer</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-/* ═══════════════════════════════════════════
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Amit Kumar Gupta — Backend Developer. Laravel · PHP · Fintech · SaaS.">
+    <title>Amit Kumar Gupta | Backend Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ═══════════════════════════════════════════
    TOKENS
 ═══════════════════════════════════════════ */
-:root {
-  --bg:        #080c14;
-  --bg2:       #0d1220;
-  --bg3:       #111827;
-  --card:      #131c2e;
-  --card2:     #172038;
-  --border:    rgba(255,255,255,0.07);
-  --border2:   rgba(255,255,255,0.12);
-  --blue:      #3b82f6;
-  --blue2:     #60a5fa;
-  --blue-g:    rgba(59,130,246,0.15);
-  --blue-gg:   rgba(59,130,246,0.08);
-  --gold:      #f59e0b;
-  --gold-g:    rgba(245,158,11,0.12);
-  --emerald:   #10b981;
-  --em-g:      rgba(16,185,129,0.12);
-  --rose:      #f43f5e;
-  --violet:    #8b5cf6;
-  --cyan:      #06b6d4;
-  --text:      rgba(255,255,255,0.88);
-  --text2:     rgba(255,255,255,0.55);
-  --text3:     rgba(255,255,255,0.35);
-  --serif:     'Instrument Serif', Georgia, serif;
-  --sans:      'Outfit', sans-serif;
-  --mono:      'JetBrains Mono', monospace;
-  --r-sm:      10px;
-  --r-md:      16px;
-  --r-lg:      24px;
-  --r-xl:      32px;
-}
+        :root {
+            --bg: #080c14;
+            --bg2: #0d1220;
+            --bg3: #111827;
+            --card: #131c2e;
+            --card2: #172038;
+            --border: rgba(255, 255, 255, 0.07);
+            --border2: rgba(255, 255, 255, 0.12);
+            --blue: #3b82f6;
+            --blue2: #60a5fa;
+            --blue-g: rgba(59, 130, 246, 0.15);
+            --blue-gg: rgba(59, 130, 246, 0.08);
+            --gold: #f59e0b;
+            --gold-g: rgba(245, 158, 11, 0.12);
+            --emerald: #10b981;
+            --em-g: rgba(16, 185, 129, 0.12);
+            --rose: #f43f5e;
+            --violet: #8b5cf6;
+            --cyan: #06b6d4;
+            --text: rgba(255, 255, 255, 0.88);
+            --text2: rgba(255, 255, 255, 0.55);
+            --text3: rgba(255, 255, 255, 0.35);
+            --serif: 'Instrument Serif', Georgia, serif;
+            --sans: 'Outfit', sans-serif;
+            --mono: 'JetBrains Mono', monospace;
+            --r-sm: 10px;
+            --r-md: 16px;
+            --r-lg: 24px;
+            --r-xl: 32px;
+        }
 
-/* ─── RESET ─── */
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box }
-html { scroll-behavior:smooth; font-size:16px }
-body {
-  font-family: var(--sans);
-  background: var(--bg);
-  color: var(--text);
-  overflow-x: hidden;
-  line-height: 1.65;
-}
-img { display:block; max-width:100% }
-a { text-decoration:none; color:inherit }
-ul { list-style:none }
-.container { max-width:1180px; margin:0 auto; padding:0 32px }
+        /* ─── RESET ─── */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
 
-/* ═══════════════════════════════════════════
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px
+        }
+
+        body {
+            font-family: var(--sans);
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.65;
+        }
+
+        img {
+            display: block;
+            max-width: 100%
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit
+        }
+
+        ul {
+            list-style: none
+        }
+
+        .container {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 32px
+        }
+
+        /* ═══════════════════════════════════════════
    CURSOR GLOW
 ═══════════════════════════════════════════ */
-.cursor-glow {
-  position:fixed; pointer-events:none; z-index:9999;
-  width:400px; height:400px;
-  background:radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%);
-  border-radius:50%; transform:translate(-50%,-50%);
-  transition:transform 0.1s linear;
-}
+        .cursor-glow {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s linear;
+        }
 
-/* ═══════════════════════════════════════════
+        /* ═══════════════════════════════════════════
    LOADER
 ═══════════════════════════════════════════ */
-#loader {
-  position:fixed; inset:0; background:var(--bg); z-index:10000;
-  display:flex; align-items:center; justify-content:center;
-  flex-direction:column; gap:20px;
-  transition: opacity 0.6s, visibility 0.6s;
-}
-#loader.done { opacity:0; visibility:hidden }
-.loader-text {
-  font-family:var(--mono); font-size:0.72rem; color:var(--text3);
-  letter-spacing:0.15em; text-transform:uppercase;
-  animation: loaderPulse 1s ease-in-out infinite;
-}
-.loader-bar {
-  width:200px; height:1px; background:var(--border2);
-  position:relative; overflow:hidden;
-}
-.loader-bar::after {
-  content:''; position:absolute; inset:0;
-  background:var(--blue);
-  animation: loaderSlide 1.2s ease-in-out forwards;
-}
-@keyframes loaderSlide { from{transform:translateX(-100%)} to{transform:translateX(0)} }
-@keyframes loaderPulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: var(--bg);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 20px;
+            transition: opacity 0.6s, visibility 0.6s;
+        }
 
-/* ═══════════════════════════════════════════
+        #loader.done {
+            opacity: 0;
+            visibility: hidden
+        }
+
+        .loader-text {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            color: var(--text3);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            animation: loaderPulse 1s ease-in-out infinite;
+        }
+
+        .loader-bar {
+            width: 200px;
+            height: 1px;
+            background: var(--border2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loader-bar::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--blue);
+            animation: loaderSlide 1.2s ease-in-out forwards;
+        }
+
+        @keyframes loaderSlide {
+            from {
+                transform: translateX(-100%)
+            }
+
+            to {
+                transform: translateX(0)
+            }
+        }
+
+        @keyframes loaderPulse {
+
+            0%,
+            100% {
+                opacity: 0.4
+            }
+
+            50% {
+                opacity: 1
+            }
+        }
+
+        /* ═══════════════════════════════════════════
    NAV
 ═══════════════════════════════════════════ */
-nav {
-  position:fixed; top:0; left:0; right:0; z-index:1000;
-  padding:20px 0;
-  transition: all 0.4s;
-}
-nav.scrolled {
-  background: rgba(8,12,20,0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
-  padding: 14px 0;
-}
-.nav-inner {
-  display:flex; align-items:center; justify-content:space-between;
-}
-.nav-logo {
-  font-family:var(--mono); font-weight:700; font-size:1rem;
-  color:#fff; letter-spacing:-0.02em;
-  display:flex; align-items:center; gap:8px;
-}
-.nav-logo span { color:var(--blue) }
-.nav-dot {
-  width:6px; height:6px; border-radius:50%; background:var(--emerald);
-  animation: blink 2s ease-in-out infinite;
-}
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
-.nav-links {
-  display:flex; align-items:center; gap:6px;
-}
-.nav-links a {
-  font-size:0.85rem; font-weight:500; color:var(--text2);
-  padding:7px 14px; border-radius:8px;
-  transition:all 0.2s;
-}
-.nav-links a:hover { color:#fff; background:rgba(255,255,255,0.06) }
-.nav-hire {
-  background:var(--blue); color:#fff !important;
-  font-weight:700 !important; font-size:0.82rem !important;
-  padding:8px 20px !important; border-radius:8px !important;
-  box-shadow:0 4px 16px rgba(59,130,246,0.3);
-  transition:all 0.2s !important;
-}
-.nav-hire:hover { background:#2563eb !important; transform:translateY(-1px); box-shadow:0 8px 24px rgba(59,130,246,0.4) !important }
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: all 0.4s;
+        }
 
-/* ═══════════════════════════════════════════
+        nav.scrolled {
+            background: rgba(8, 12, 20, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 14px 0;
+        }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-family: var(--mono);
+            font-weight: 700;
+            font-size: 1rem;
+            color: #fff;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-logo span {
+            color: var(--blue)
+        }
+
+        .nav-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--emerald);
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: 0.3
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-links a {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text2);
+            padding: 7px 14px;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.06)
+        }
+
+        .nav-hire {
+            background: var(--blue);
+            color: #fff !important;
+            font-weight: 700 !important;
+            font-size: 0.82rem !important;
+            padding: 8px 20px !important;
+            border-radius: 8px !important;
+            box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
+            transition: all 0.2s !important;
+        }
+
+        .nav-hire:hover {
+            background: #2563eb !important;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4) !important
+        }
+
+        /* ═══════════════════════════════════════════
    HERO
 ═══════════════════════════════════════════ */
-.hero {
-  min-height:100vh; display:flex; align-items:center;
-  position:relative; overflow:hidden; padding:120px 0 80px;
-}
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 120px 0 80px;
+        }
 
-/* Animated mesh background */
-.hero-mesh {
-  position:absolute; inset:0; overflow:hidden; pointer-events:none;
-}
-.mesh-blob {
-  position:absolute; border-radius:50%;
-  filter:blur(80px); opacity:0.5;
-  animation: floatBlob 8s ease-in-out infinite;
-}
-.mesh-blob:nth-child(1) {
-  width:600px; height:600px; top:-200px; right:-100px;
-  background:radial-gradient(circle, rgba(59,130,246,0.2) 0%, transparent 70%);
-  animation-delay:0s; animation-duration:10s;
-}
-.mesh-blob:nth-child(2) {
-  width:400px; height:400px; bottom:-100px; left:-50px;
-  background:radial-gradient(circle, rgba(245,158,11,0.1) 0%, transparent 70%);
-  animation-delay:-3s; animation-duration:8s;
-}
-.mesh-blob:nth-child(3) {
-  width:300px; height:300px; top:40%; left:30%;
-  background:radial-gradient(circle, rgba(16,185,129,0.08) 0%, transparent 70%);
-  animation-delay:-6s; animation-duration:12s;
-}
-@keyframes floatBlob {
-  0%,100% { transform:translate(0,0) scale(1) }
-  33% { transform:translate(30px,-20px) scale(1.05) }
-  66% { transform:translate(-20px,30px) scale(0.95) }
-}
+        /* Animated mesh background */
+        .hero-mesh {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
 
-/* Grid lines */
-.hero-grid {
-  position:absolute; inset:0; pointer-events:none;
-  background-image:
-    linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px);
-  background-size:80px 80px;
-  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent);
-}
+        .mesh-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            animation: floatBlob 8s ease-in-out infinite;
+        }
 
-.hero-inner {
-  position:relative; z-index:2;
-  display:grid; grid-template-columns:1fr 480px;
-  gap:80px; align-items:center;
-}
+        .mesh-blob:nth-child(1) {
+            width: 600px;
+            height: 600px;
+            top: -200px;
+            right: -100px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, transparent 70%);
+            animation-delay: 0s;
+            animation-duration: 10s;
+        }
 
-/* Left */
-.hero-left { display:flex; flex-direction:column; gap:0 }
-.hero-chip {
-  display:inline-flex; align-items:center; gap:8px;
-  background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.25);
-  color:var(--emerald); font-family:var(--mono); font-size:0.7rem;
-  font-weight:700; letter-spacing:0.12em; text-transform:uppercase;
-  padding:6px 14px; border-radius:30px; margin-bottom:28px;
-  width:fit-content;
-  animation: fadeUp 0.8s ease 0.2s both;
-}
-.hero-chip::before {
-  content:''; width:6px; height:6px; border-radius:50%;
-  background:var(--emerald); animation:blink 2s infinite;
-}
-.hero-heading {
-  font-family:var(--serif); font-size:clamp(3rem,6vw,5.5rem);
-  line-height:1.05; letter-spacing:-0.02em; color:#fff;
-  margin-bottom:20px;
-  animation: fadeUp 0.8s ease 0.35s both;
-}
-.hero-heading em { font-style:italic; color:var(--blue2) }
-.hero-heading .outline {
-  -webkit-text-stroke:1px rgba(255,255,255,0.3);
-  color:transparent;
-}
-.hero-role {
-  font-family:var(--mono); font-size:0.88rem; color:var(--text3);
-  letter-spacing:0.04em; margin-bottom:24px;
-  animation: fadeUp 0.8s ease 0.45s both;
-}
-.hero-desc {
-  font-size:1.05rem; color:var(--text2); line-height:1.8;
-  max-width:520px; margin-bottom:36px;
-  animation: fadeUp 0.8s ease 0.55s both;
-}
-.hero-desc strong { color:var(--text); font-weight:600 }
-.hero-pills {
-  display:flex; flex-wrap:wrap; gap:8px; margin-bottom:36px;
-  animation: fadeUp 0.8s ease 0.65s both;
-}
-.hero-pill {
-  font-size:0.75rem; font-weight:600; padding:5px 14px;
-  border-radius:30px; border:1px solid var(--border2);
-  color:var(--text2); background:rgba(255,255,255,0.04);
-  letter-spacing:0.03em; transition:all 0.2s;
-}
-.hero-pill:hover { border-color:var(--blue); color:var(--blue2); background:var(--blue-gg) }
-.hero-btns {
-  display:flex; gap:14px; flex-wrap:wrap; margin-bottom:48px;
-  animation: fadeUp 0.8s ease 0.75s both;
-}
-.btn-p {
-  display:inline-flex; align-items:center; gap:8px;
-  padding:14px 28px; border-radius:12px; font-family:var(--sans);
-  font-weight:700; font-size:0.92rem; cursor:pointer;
-  transition:all 0.25s; border:none;
-}
-.btn-solid {
-  background:linear-gradient(135deg, var(--blue), #1d4ed8);
-  color:#fff; box-shadow:0 8px 24px rgba(59,130,246,0.35);
-}
-.btn-solid:hover { transform:translateY(-2px); box-shadow:0 16px 40px rgba(59,130,246,0.45) }
-.btn-ghost {
-  background:rgba(255,255,255,0.05); color:var(--text);
-  border:1px solid var(--border2);
-}
-.btn-ghost:hover { background:rgba(255,255,255,0.1); border-color:var(--border2); transform:translateY(-2px) }
-.hero-socials {
-  display:flex; gap:12px;
-  animation: fadeUp 0.8s ease 0.85s both;
-}
-.hero-social {
-  width:42px; height:42px; border-radius:10px;
-  background:rgba(255,255,255,0.05); border:1px solid var(--border);
-  color:var(--text3); font-size:1rem;
-  display:flex; align-items:center; justify-content:center;
-  transition:all 0.25s;
-}
-.hero-social:hover { background:var(--blue); color:#fff; border-color:var(--blue); transform:translateY(-3px) }
+        .mesh-blob:nth-child(2) {
+            width: 400px;
+            height: 400px;
+            bottom: -100px;
+            left: -50px;
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.1) 0%, transparent 70%);
+            animation-delay: -3s;
+            animation-duration: 8s;
+        }
 
-/* Right — Photo card */
-.hero-right { position:relative; animation: fadeUp 0.8s ease 0.4s both }
-.photo-card {
-  position:relative; border-radius:var(--r-xl);
-  overflow:hidden; aspect-ratio:3/4;
-  border:1px solid var(--border2);
-  box-shadow:0 60px 100px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05);
-}
-.photo-card img {
-  width:100%; height:100%; object-fit:cover; object-position:center top;
-  transition:transform 0.6s ease;
-}
-.photo-card:hover img { transform:scale(1.03) }
-.photo-overlay {
-  position:absolute; inset:0;
-  background:linear-gradient(to top, rgba(8,12,20,0.7) 0%, rgba(8,12,20,0.1) 50%, transparent 100%);
-}
-.photo-badge {
-  position:absolute; bottom:24px; left:50%; transform:translateX(-50%);
-  background:rgba(8,12,20,0.8); backdrop-filter:blur(20px);
-  border:1px solid var(--border2); border-radius:14px;
-  padding:12px 20px; display:flex; align-items:center; gap:12px;
-  white-space:nowrap;
-}
-.badge-dot {
-  width:8px; height:8px; border-radius:50%; background:var(--emerald);
-  box-shadow:0 0 8px var(--emerald);
-  animation:blink 2s ease-in-out infinite;
-}
-.badge-text { font-size:0.82rem; font-weight:600; color:#fff }
-.badge-sub { font-size:0.72rem; color:var(--text3); margin-top:1px }
+        .mesh-blob:nth-child(3) {
+            width: 300px;
+            height: 300px;
+            top: 40%;
+            left: 30%;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, transparent 70%);
+            animation-delay: -6s;
+            animation-duration: 12s;
+        }
 
-/* Floating stat cards */
-.stat-float {
-  position:absolute; background:rgba(13,18,32,0.9);
-  backdrop-filter:blur(20px); border:1px solid var(--border2);
-  border-radius:var(--r-md); padding:14px 18px;
-  box-shadow:0 20px 40px rgba(0,0,0,0.4);
-  animation: floatCard 4s ease-in-out infinite;
-}
-.stat-float:nth-child(2) { top:-20px; left:-60px; animation-delay:0s }
-.stat-float:nth-child(3) { bottom:120px; right:-50px; animation-delay:-2s }
-@keyframes floatCard {
-  0%,100%{ transform:translateY(0) }
-  50%{ transform:translateY(-10px) }
-}
-.sf-num { font-size:1.6rem; font-weight:800; color:#fff; line-height:1; letter-spacing:-0.04em }
-.sf-label { font-size:0.68rem; color:var(--text3); margin-top:3px; font-weight:500; letter-spacing:0.05em }
+        @keyframes floatBlob {
 
-/* Scroll indicator */
-.hero-scroll {
-  position:absolute; bottom:36px; left:50%; transform:translateX(-50%);
-  display:flex; flex-direction:column; align-items:center; gap:10px;
-  color:var(--text3); font-family:var(--mono); font-size:0.65rem;
-  letter-spacing:0.12em; text-transform:uppercase; z-index:2;
-}
-.scroll-track {
-  width:1px; height:50px;
-  background:linear-gradient(to bottom, var(--border2), transparent);
-  position:relative; overflow:hidden;
-}
-.scroll-thumb {
-  position:absolute; top:0; left:0; right:0; height:50%;
-  background:linear-gradient(to bottom, var(--blue), transparent);
-  animation:scrollAnim 2s ease-in-out infinite;
-}
-@keyframes scrollAnim { 0%{transform:translateY(-100%)} 100%{transform:translateY(200%)} }
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1)
+            }
 
-/* Fade up animation */
-@keyframes fadeUp {
-  from { opacity:0; transform:translateY(30px) }
-  to   { opacity:1; transform:translateY(0) }
-}
+            33% {
+                transform: translate(30px, -20px) scale(1.05)
+            }
 
-/* ═══════════════════════════════════════════
+            66% {
+                transform: translate(-20px, 30px) scale(0.95)
+            }
+        }
+
+        /* Grid lines */
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(rgba(59, 130, 246, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.04) 1px, transparent 1px);
+            background-size: 80px 80px;
+            mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent);
+        }
+
+        .hero-inner {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 480px;
+            gap: 80px;
+            align-items: center;
+        }
+
+        /* Left */
+        .hero-left {
+            display: flex;
+            flex-direction: column;
+            gap: 0
+        }
+
+        .hero-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.25);
+            color: var(--emerald);
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            border-radius: 30px;
+            margin-bottom: 28px;
+            width: fit-content;
+            animation: fadeUp 0.8s ease 0.2s both;
+        }
+
+        .hero-chip::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--emerald);
+            animation: blink 2s infinite;
+        }
+
+        .hero-heading {
+            font-family: var(--serif);
+            font-size: clamp(3rem, 6vw, 5.5rem);
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            color: #fff;
+            margin-bottom: 20px;
+            animation: fadeUp 0.8s ease 0.35s both;
+        }
+
+        .hero-heading em {
+            font-style: italic;
+            color: var(--blue2)
+        }
+
+        .hero-heading .outline {
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+            color: transparent;
+        }
+
+        .hero-role {
+            font-family: var(--mono);
+            font-size: 0.88rem;
+            color: var(--text3);
+            letter-spacing: 0.04em;
+            margin-bottom: 24px;
+            animation: fadeUp 0.8s ease 0.45s both;
+        }
+
+        .hero-desc {
+            font-size: 1.05rem;
+            color: var(--text2);
+            line-height: 1.8;
+            max-width: 520px;
+            margin-bottom: 36px;
+            animation: fadeUp 0.8s ease 0.55s both;
+        }
+
+        .hero-desc strong {
+            color: var(--text);
+            font-weight: 600
+        }
+
+        .hero-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 36px;
+            animation: fadeUp 0.8s ease 0.65s both;
+        }
+
+        .hero-pill {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 5px 14px;
+            border-radius: 30px;
+            border: 1px solid var(--border2);
+            color: var(--text2);
+            background: rgba(255, 255, 255, 0.04);
+            letter-spacing: 0.03em;
+            transition: all 0.2s;
+        }
+
+        .hero-pill:hover {
+            border-color: var(--blue);
+            color: var(--blue2);
+            background: var(--blue-gg)
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-bottom: 48px;
+            animation: fadeUp 0.8s ease 0.75s both;
+        }
+
+        .btn-p {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-family: var(--sans);
+            font-weight: 700;
+            font-size: 0.92rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            border: none;
+        }
+
+        .btn-solid {
+            background: linear-gradient(135deg, var(--blue), #1d4ed8);
+            color: #fff;
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.35);
+        }
+
+        .btn-solid:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 40px rgba(59, 130, 246, 0.45)
+        }
+
+        .btn-ghost {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text);
+            border: 1px solid var(--border2);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--border2);
+            transform: translateY(-2px)
+        }
+
+        .hero-socials {
+            display: flex;
+            gap: 12px;
+            animation: fadeUp 0.8s ease 0.85s both;
+        }
+
+        .hero-social {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: var(--text3);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s;
+        }
+
+        .hero-social:hover {
+            background: var(--blue);
+            color: #fff;
+            border-color: var(--blue);
+            transform: translateY(-3px)
+        }
+
+        /* Right — Photo card */
+        .hero-right {
+            position: relative;
+            animation: fadeUp 0.8s ease 0.4s both
+        }
+
+        .photo-card {
+            position: relative;
+            border-radius: var(--r-xl);
+            overflow: hidden;
+            aspect-ratio: 3/4;
+            border: 1px solid var(--border2);
+            box-shadow: 0 60px 100px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05);
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            transition: transform 0.6s ease;
+        }
+
+        .photo-card:hover img {
+            transform: scale(1.03)
+        }
+
+        .photo-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(8, 12, 20, 0.7) 0%, rgba(8, 12, 20, 0.1) 50%, transparent 100%);
+        }
+
+        .photo-badge {
+            position: absolute;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(8, 12, 20, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border2);
+            border-radius: 14px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            white-space: nowrap;
+        }
+
+        .badge-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--emerald);
+            box-shadow: 0 0 8px var(--emerald);
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        .badge-text {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #fff
+        }
+
+        .badge-sub {
+            font-size: 0.72rem;
+            color: var(--text3);
+            margin-top: 1px
+        }
+
+        /* Floating stat cards */
+        .stat-float {
+            position: absolute;
+            background: rgba(13, 18, 32, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border2);
+            border-radius: var(--r-md);
+            padding: 14px 18px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            animation: floatCard 4s ease-in-out infinite;
+        }
+
+        .stat-float:nth-child(2) {
+            top: -20px;
+            left: -60px;
+            animation-delay: 0s
+        }
+
+        .stat-float:nth-child(3) {
+            bottom: 120px;
+            right: -50px;
+            animation-delay: -2s
+        }
+
+        @keyframes floatCard {
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(-10px)
+            }
+        }
+
+        .sf-num {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1;
+            letter-spacing: -0.04em
+        }
+
+        .sf-label {
+            font-size: 0.68rem;
+            color: var(--text3);
+            margin-top: 3px;
+            font-weight: 500;
+            letter-spacing: 0.05em
+        }
+
+        /* Scroll indicator */
+        .hero-scroll {
+            position: absolute;
+            bottom: 36px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: var(--text3);
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            z-index: 2;
+        }
+
+        .scroll-track {
+            width: 1px;
+            height: 50px;
+            background: linear-gradient(to bottom, var(--border2), transparent);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scroll-thumb {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(to bottom, var(--blue), transparent);
+            animation: scrollAnim 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollAnim {
+            0% {
+                transform: translateY(-100%)
+            }
+
+            100% {
+                transform: translateY(200%)
+            }
+        }
+
+        /* Fade up animation */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        /* ═══════════════════════════════════════════
    SECTION COMMONS
 ═══════════════════════════════════════════ */
-section { padding:100px 0 }
-.s-eyebrow {
-  display:inline-flex; align-items:center; gap:8px;
-  font-family:var(--mono); font-size:0.68rem; font-weight:700;
-  color:var(--blue2); text-transform:uppercase; letter-spacing:0.12em;
-  margin-bottom:14px;
-}
-.s-eyebrow::before, .s-eyebrow::after {
-  content:''; display:block; height:1px; background:var(--blue);
-  opacity:0.4;
-}
-.s-eyebrow::before { width:24px }
-.s-eyebrow::after  { width:12px }
-.s-title {
-  font-family:var(--serif); font-size:clamp(2rem,4vw,3.2rem);
-  color:#fff; line-height:1.15; letter-spacing:-0.03em; margin-bottom:12px;
-}
-.s-title em { font-style:italic; color:var(--blue2) }
-.s-sub { font-size:1rem; color:var(--text2); max-width:540px; line-height:1.75 }
-.s-header { margin-bottom:64px }
-.s-header.center { text-align:center }
-.s-header.center .s-eyebrow { justify-content:center }
-.s-header.center .s-sub { margin:0 auto }
+        section {
+            padding: 100px 0
+        }
 
-/* Reveal on scroll */
-.reveal {
-  opacity:0; transform:translateY(40px);
-  transition:opacity 0.7s ease, transform 0.7s ease;
-}
-.reveal.visible { opacity:1; transform:translateY(0) }
+        .s-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: var(--blue2);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 14px;
+        }
 
-/* ═══════════════════════════════════════════
+        .s-eyebrow::before,
+        .s-eyebrow::after {
+            content: '';
+            display: block;
+            height: 1px;
+            background: var(--blue);
+            opacity: 0.4;
+        }
+
+        .s-eyebrow::before {
+            width: 24px
+        }
+
+        .s-eyebrow::after {
+            width: 12px
+        }
+
+        .s-title {
+            font-family: var(--serif);
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            color: #fff;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            margin-bottom: 12px;
+        }
+
+        .s-title em {
+            font-style: italic;
+            color: var(--blue2)
+        }
+
+        .s-sub {
+            font-size: 1rem;
+            color: var(--text2);
+            max-width: 540px;
+            line-height: 1.75
+        }
+
+        .s-header {
+            margin-bottom: 64px
+        }
+
+        .s-header.center {
+            text-align: center
+        }
+
+        .s-header.center .s-eyebrow {
+            justify-content: center
+        }
+
+        .s-header.center .s-sub {
+            margin: 0 auto
+        }
+
+        /* Reveal on scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        /* ═══════════════════════════════════════════
    ABOUT
 ═══════════════════════════════════════════ */
-#about { background:var(--bg2) }
-.about-wrap { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start }
+        #about {
+            background: var(--bg2)
+        }
 
-.about-text p {
-  font-size:1rem; line-height:1.85; color:var(--text2); margin-bottom:18px;
-}
-.about-text p strong { color:var(--text); font-weight:600 }
+        .about-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start
+        }
 
-/* Stat grid */
-.stat-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:32px }
-.stat-card-inner {
-  background:var(--card); border:1px solid var(--border);
-  border-radius:var(--r-md); padding:20px;
-  text-align:center; position:relative; overflow:hidden;
-  transition:all 0.3s;
-}
-.stat-card-inner::before {
-  content:''; position:absolute; top:0; left:0; right:0; height:2px;
-  background:linear-gradient(90deg, var(--blue), var(--cyan));
-  transform:scaleX(0); transform-origin:left;
-  transition:transform 0.3s;
-}
-.stat-card-inner:hover { border-color:rgba(59,130,246,0.3); transform:translateY(-4px) }
-.stat-card-inner:hover::before { transform:scaleX(1) }
-.stat-num {
-  font-size:2.4rem; font-weight:900; color:#fff;
-  line-height:1; letter-spacing:-0.06em; margin-bottom:6px;
-  background:linear-gradient(135deg,#fff,var(--blue2));
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-}
-.stat-lbl { font-size:0.72rem; color:var(--text3); font-weight:600; letter-spacing:0.06em; text-transform:uppercase }
+        .about-text p {
+            font-size: 1rem;
+            line-height: 1.85;
+            color: var(--text2);
+            margin-bottom: 18px;
+        }
 
-/* Skills */
-.skills-wrap {}
-.skill-group { margin-bottom:28px }
-.skill-group-title {
-  font-size:0.72rem; font-weight:700; text-transform:uppercase;
-  letter-spacing:0.1em; color:var(--text3);
-  padding-bottom:10px; margin-bottom:12px;
-  border-bottom:1px solid var(--border);
-  display:flex; align-items:center; gap:8px;
-}
-.skill-group-title i { font-size:0.8rem }
-.skill-group-title.c-blue  i { color:var(--blue) }
-.skill-group-title.c-green i { color:var(--emerald) }
-.skill-group-title.c-gold  i { color:var(--gold) }
-.skill-group-title.c-gray  i { color:var(--text3) }
-.tags { display:flex; flex-wrap:wrap; gap:8px }
-.tag {
-  padding:5px 14px; border-radius:8px; font-size:0.78rem; font-weight:600;
-  border:1px solid; transition:all 0.2s; cursor:default;
-}
-.tag.blue  { background:var(--blue-gg); color:var(--blue2); border-color:rgba(59,130,246,0.2) }
-.tag.blue:hover  { background:var(--blue); color:#fff; border-color:var(--blue); transform:translateY(-2px) }
-.tag.green { background:var(--em-g); color:var(--emerald); border-color:rgba(16,185,129,0.25) }
-.tag.green:hover { background:var(--emerald); color:#fff; border-color:var(--emerald); transform:translateY(-2px) }
-.tag.gold  { background:var(--gold-g); color:var(--gold); border-color:rgba(245,158,11,0.25) }
-.tag.gold:hover  { background:var(--gold); color:#000; border-color:var(--gold); transform:translateY(-2px) }
-.tag.gray  { background:rgba(255,255,255,0.04); color:var(--text2); border-color:var(--border) }
-.tag.gray:hover  { background:rgba(255,255,255,0.12); color:#fff; transform:translateY(-2px) }
+        .about-text p strong {
+            color: var(--text);
+            font-weight: 600
+        }
 
-/* ═══════════════════════════════════════════
+        /* Stat grid */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 32px
+        }
+
+        .stat-card-inner {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--r-md);
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .stat-card-inner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--blue), var(--cyan));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s;
+        }
+
+        .stat-card-inner:hover {
+            border-color: rgba(59, 130, 246, 0.3);
+            transform: translateY(-4px)
+        }
+
+        .stat-card-inner:hover::before {
+            transform: scaleX(1)
+        }
+
+        .stat-num {
+            font-size: 2.4rem;
+            font-weight: 900;
+            color: #fff;
+            line-height: 1;
+            letter-spacing: -0.06em;
+            margin-bottom: 6px;
+            background: linear-gradient(135deg, #fff, var(--blue2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-lbl {
+            font-size: 0.72rem;
+            color: var(--text3);
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase
+        }
+
+        /* Skills */
+        .skills-wrap {}
+
+        .skill-group {
+            margin-bottom: 28px
+        }
+
+        .skill-group-title {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text3);
+            padding-bottom: 10px;
+            margin-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .skill-group-title i {
+            font-size: 0.8rem
+        }
+
+        .skill-group-title.c-blue i {
+            color: var(--blue)
+        }
+
+        .skill-group-title.c-green i {
+            color: var(--emerald)
+        }
+
+        .skill-group-title.c-gold i {
+            color: var(--gold)
+        }
+
+        .skill-group-title.c-gray i {
+            color: var(--text3)
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px
+        }
+
+        .tag {
+            padding: 5px 14px;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            border: 1px solid;
+            transition: all 0.2s;
+            cursor: default;
+        }
+
+        .tag.blue {
+            background: var(--blue-gg);
+            color: var(--blue2);
+            border-color: rgba(59, 130, 246, 0.2)
+        }
+
+        .tag.blue:hover {
+            background: var(--blue);
+            color: #fff;
+            border-color: var(--blue);
+            transform: translateY(-2px)
+        }
+
+        .tag.green {
+            background: var(--em-g);
+            color: var(--emerald);
+            border-color: rgba(16, 185, 129, 0.25)
+        }
+
+        .tag.green:hover {
+            background: var(--emerald);
+            color: #fff;
+            border-color: var(--emerald);
+            transform: translateY(-2px)
+        }
+
+        .tag.gold {
+            background: var(--gold-g);
+            color: var(--gold);
+            border-color: rgba(245, 158, 11, 0.25)
+        }
+
+        .tag.gold:hover {
+            background: var(--gold);
+            color: #000;
+            border-color: var(--gold);
+            transform: translateY(-2px)
+        }
+
+        .tag.gray {
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text2);
+            border-color: var(--border)
+        }
+
+        .tag.gray:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            transform: translateY(-2px)
+        }
+
+        /* ═══════════════════════════════════════════
    EXPERIENCE
 ═══════════════════════════════════════════ */
-#experience { background:var(--bg) }
-.tl { position:relative; padding-left:64px }
-.tl::before {
-  content:''; position:absolute; left:20px; top:8px; bottom:0;
-  width:1px; background:linear-gradient(to bottom, var(--blue), transparent);
-}
-.tl-item { margin-bottom:32px; position:relative }
-.tl-icon {
-  position:absolute; left:-64px; top:0;
-  width:42px; height:42px; border-radius:12px;
-  background:var(--card); border:1px solid var(--border2);
-  display:flex; align-items:center; justify-content:center;
-  color:var(--blue); font-size:0.95rem;
-  box-shadow:0 0 20px rgba(59,130,246,0.15);
-  transition:all 0.3s; z-index:1;
-}
-.tl-item:hover .tl-icon {
-  background:var(--blue); color:#fff; border-color:var(--blue);
-  box-shadow:0 0 30px rgba(59,130,246,0.4);
-}
-.tl-card {
-  background:var(--card); border:1px solid var(--border);
-  border-radius:var(--r-lg); padding:28px 32px;
-  transition:all 0.35s; position:relative; overflow:hidden;
-}
-.tl-card::before {
-  content:''; position:absolute; inset:0; border-radius:var(--r-lg);
-  background:linear-gradient(135deg, rgba(59,130,246,0.03) 0%, transparent 50%);
-  opacity:0; transition:opacity 0.35s;
-}
-.tl-item:hover .tl-card {
-  border-color:rgba(59,130,246,0.25);
-  box-shadow:0 24px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(59,130,246,0.1);
-  transform:translateX(6px);
-}
-.tl-item:hover .tl-card::before { opacity:1 }
-.tl-top { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:10px; margin-bottom:6px }
-.tl-role { font-size:1.1rem; font-weight:800; color:#fff; letter-spacing:-0.02em }
-.tl-date {
-  font-family:var(--mono); font-size:0.7rem; font-weight:700;
-  color:var(--blue2); background:var(--blue-gg);
-  border:1px solid rgba(59,130,246,0.2);
-  padding:4px 12px; border-radius:20px; letter-spacing:0.02em;
-}
-.tl-company { font-size:0.85rem; color:var(--text3); margin-bottom:16px; font-weight:500 }
-.tl-body { font-size:0.93rem; color:var(--text2); line-height:1.75; margin-bottom:16px }
-.tl-body p { margin-bottom:12px }
-.tl-body ul { padding-left:16px }
-.tl-body li {
-  margin-bottom:6px; position:relative;
-}
-.tl-body li::marker { color:var(--blue) }
-.tl-chips { display:flex; flex-wrap:wrap; gap:6px }
-.tl-chip {
-  font-size:0.7rem; font-weight:700; padding:3px 10px; border-radius:6px;
-  background:rgba(59,130,246,0.1); color:var(--blue2);
-  border:1px solid rgba(59,130,246,0.15);
-}
+        #experience {
+            background: var(--bg)
+        }
 
-/* ═══════════════════════════════════════════
+        .tl {
+            position: relative;
+            padding-left: 64px
+        }
+
+        .tl::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 8px;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(to bottom, var(--blue), transparent);
+        }
+
+        .tl-item {
+            margin-bottom: 32px;
+            position: relative
+        }
+
+        .tl-icon {
+            position: absolute;
+            left: -64px;
+            top: 0;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: var(--card);
+            border: 1px solid var(--border2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--blue);
+            font-size: 0.95rem;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.15);
+            transition: all 0.3s;
+            z-index: 1;
+        }
+
+        .tl-item:hover .tl-icon {
+            background: var(--blue);
+            color: #fff;
+            border-color: var(--blue);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.4);
+        }
+
+        .tl-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--r-lg);
+            padding: 28px 32px;
+            transition: all 0.35s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tl-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: var(--r-lg);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.03) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.35s;
+        }
+
+        .tl-item:hover .tl-card {
+            border-color: rgba(59, 130, 246, 0.25);
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(59, 130, 246, 0.1);
+            transform: translateX(6px);
+        }
+
+        .tl-item:hover .tl-card::before {
+            opacity: 1
+        }
+
+        .tl-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 6px
+        }
+
+        .tl-role {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -0.02em
+        }
+
+        .tl-date {
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--blue2);
+            background: var(--blue-gg);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            letter-spacing: 0.02em;
+        }
+
+        .tl-company {
+            font-size: 0.85rem;
+            color: var(--text3);
+            margin-bottom: 16px;
+            font-weight: 500
+        }
+
+        .tl-body {
+            font-size: 0.93rem;
+            color: var(--text2);
+            line-height: 1.75;
+            margin-bottom: 16px
+        }
+
+        .tl-body p {
+            margin-bottom: 12px
+        }
+
+        .tl-body ul {
+            padding-left: 16px
+        }
+
+        .tl-body li {
+            margin-bottom: 6px;
+            position: relative;
+        }
+
+        .tl-body li::marker {
+            color: var(--blue)
+        }
+
+        .tl-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px
+        }
+
+        .tl-chip {
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 6px;
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--blue2);
+            border: 1px solid rgba(59, 130, 246, 0.15);
+        }
+
+        /* ═══════════════════════════════════════════
    PROJECTS
 ═══════════════════════════════════════════ */
-#projects { background:var(--bg2) }
-.filter-row { display:flex; justify-content:center; flex-wrap:wrap; gap:8px; margin-bottom:52px }
-.f-btn {
-  font-family:var(--sans); font-size:0.82rem; font-weight:700;
-  padding:8px 20px; border-radius:10px; cursor:pointer;
-  border:1px solid var(--border); color:var(--text2);
-  background:rgba(255,255,255,0.03);
-  transition:all 0.2s;
-}
-.f-btn:hover { color:#fff; background:rgba(255,255,255,0.08); border-color:var(--border2) }
-.f-btn.active { background:var(--blue); color:#fff; border-color:var(--blue); box-shadow:0 4px 20px rgba(59,130,246,0.3) }
+        #projects {
+            background: var(--bg2)
+        }
 
-.proj-grid {
-  display:grid; grid-template-columns:repeat(3, 1fr); gap:20px;
-}
-.p-card {
-  background:var(--card); border:1px solid var(--border);
-  border-radius:var(--r-lg); overflow:hidden;
-  display:flex; flex-direction:column; transition:all 0.35s;
-  position:relative;
-}
-.p-card::after {
-  content:''; position:absolute; inset:0; border-radius:var(--r-lg);
-  opacity:0; transition:opacity 0.35s;
-  background:linear-gradient(135deg, rgba(59,130,246,0.05), transparent);
-}
-.p-card:hover {
-  transform:translateY(-8px);
-  box-shadow:0 32px 64px rgba(0,0,0,0.5), 0 0 0 1px rgba(59,130,246,0.15);
-  border-color:rgba(59,130,246,0.2);
-}
-.p-card:hover::after { opacity:1 }
-/* Top accent bar */
-.p-accent { height:3px }
-.p-accent.blue    { background:linear-gradient(90deg,#3b82f6,#60a5fa) }
-.p-accent.green   { background:linear-gradient(90deg,#10b981,#34d399) }
-.p-accent.gold    { background:linear-gradient(90deg,#f59e0b,#fbbf24) }
-.p-accent.purple  { background:linear-gradient(90deg,#8b5cf6,#a78bfa) }
-.p-accent.rose    { background:linear-gradient(90deg,#f43f5e,#fb7185) }
-.p-accent.cyan    { background:linear-gradient(90deg,#06b6d4,#22d3ee) }
+        .filter-row {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 52px
+        }
 
-.p-body { padding:24px; flex:1; display:flex; flex-direction:column }
-.p-icon-wrap {
-  width:44px; height:44px; border-radius:12px; margin-bottom:14px;
-  display:flex; align-items:center; justify-content:center; font-size:1.1rem;
-}
-.p-icon-wrap.blue   { background:rgba(59,130,246,0.12); color:#60a5fa }
-.p-icon-wrap.green  { background:rgba(16,185,129,0.12); color:#34d399 }
-.p-icon-wrap.gold   { background:rgba(245,158,11,0.12); color:#fbbf24 }
-.p-icon-wrap.purple { background:rgba(139,92,246,0.12); color:#a78bfa }
-.p-icon-wrap.rose   { background:rgba(244,63,94,0.12);  color:#fb7185 }
-.p-icon-wrap.cyan   { background:rgba(6,182,212,0.12);  color:#22d3ee }
-.p-period { font-family:var(--mono); font-size:0.67rem; color:var(--text3); margin-bottom:4px }
-.p-name { font-size:1.05rem; font-weight:800; color:#fff; margin-bottom:4px; letter-spacing:-0.02em }
-.p-company { font-size:0.75rem; color:var(--text3); font-weight:500; margin-bottom:12px }
-.p-desc { font-size:0.84rem; color:var(--text2); line-height:1.7; flex:1; margin-bottom:14px }
-.p-tags { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px }
-.p-tag {
-  font-size:0.67rem; font-weight:700; padding:2px 9px; border-radius:5px;
-  background:rgba(255,255,255,0.05); color:var(--text2);
-  border:1px solid var(--border);
-}
-.p-foot { border-top:1px solid var(--border); padding-top:14px; display:flex; justify-content:space-between; align-items:center }
-.p-link {
-  font-size:0.8rem; font-weight:700; color:var(--blue2);
-  display:flex; align-items:center; gap:5px; transition:gap 0.2s;
-}
-.p-link:hover { gap:8px }
-.p-cat { font-size:0.7rem; color:var(--text3); font-family:var(--mono) }
+        .f-btn {
+            font-family: var(--sans);
+            font-size: 0.82rem;
+            font-weight: 700;
+            padding: 8px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            border: 1px solid var(--border);
+            color: var(--text2);
+            background: rgba(255, 255, 255, 0.03);
+            transition: all 0.2s;
+        }
 
-/* ═══════════════════════════════════════════
+        .f-btn:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--border2)
+        }
+
+        .f-btn.active {
+            background: var(--blue);
+            color: #fff;
+            border-color: var(--blue);
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3)
+        }
+
+        .proj-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .p-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--r-lg);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.35s;
+            position: relative;
+        }
+
+        .p-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: var(--r-lg);
+            opacity: 0;
+            transition: opacity 0.35s;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), transparent);
+        }
+
+        .p-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 32px 64px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(59, 130, 246, 0.15);
+            border-color: rgba(59, 130, 246, 0.2);
+        }
+
+        .p-card:hover::after {
+            opacity: 1
+        }
+
+        /* Top accent bar */
+        .p-accent {
+            height: 3px
+        }
+
+        .p-accent.blue {
+            background: linear-gradient(90deg, #3b82f6, #60a5fa)
+        }
+
+        .p-accent.green {
+            background: linear-gradient(90deg, #10b981, #34d399)
+        }
+
+        .p-accent.gold {
+            background: linear-gradient(90deg, #f59e0b, #fbbf24)
+        }
+
+        .p-accent.purple {
+            background: linear-gradient(90deg, #8b5cf6, #a78bfa)
+        }
+
+        .p-accent.rose {
+            background: linear-gradient(90deg, #f43f5e, #fb7185)
+        }
+
+        .p-accent.cyan {
+            background: linear-gradient(90deg, #06b6d4, #22d3ee)
+        }
+
+        .p-body {
+            padding: 24px;
+            flex: 1;
+            display: flex;
+            flex-direction: column
+        }
+
+        .p-icon-wrap {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .p-icon-wrap.blue {
+            background: rgba(59, 130, 246, 0.12);
+            color: #60a5fa
+        }
+
+        .p-icon-wrap.green {
+            background: rgba(16, 185, 129, 0.12);
+            color: #34d399
+        }
+
+        .p-icon-wrap.gold {
+            background: rgba(245, 158, 11, 0.12);
+            color: #fbbf24
+        }
+
+        .p-icon-wrap.purple {
+            background: rgba(139, 92, 246, 0.12);
+            color: #a78bfa
+        }
+
+        .p-icon-wrap.rose {
+            background: rgba(244, 63, 94, 0.12);
+            color: #fb7185
+        }
+
+        .p-icon-wrap.cyan {
+            background: rgba(6, 182, 212, 0.12);
+            color: #22d3ee
+        }
+
+        .p-period {
+            font-family: var(--mono);
+            font-size: 0.67rem;
+            color: var(--text3);
+            margin-bottom: 4px
+        }
+
+        .p-name {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 4px;
+            letter-spacing: -0.02em
+        }
+
+        .p-company {
+            font-size: 0.75rem;
+            color: var(--text3);
+            font-weight: 500;
+            margin-bottom: 12px
+        }
+
+        .p-desc {
+            font-size: 0.84rem;
+            color: var(--text2);
+            line-height: 1.7;
+            flex: 1;
+            margin-bottom: 14px
+        }
+
+        .p-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 16px
+        }
+
+        .p-tag {
+            font-size: 0.67rem;
+            font-weight: 700;
+            padding: 2px 9px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text2);
+            border: 1px solid var(--border);
+        }
+
+        .p-foot {
+            border-top: 1px solid var(--border);
+            padding-top: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .p-link {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--blue2);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: gap 0.2s;
+        }
+
+        .p-link:hover {
+            gap: 8px
+        }
+
+        .p-cat {
+            font-size: 0.7rem;
+            color: var(--text3);
+            font-family: var(--mono)
+        }
+
+        /* ═══════════════════════════════════════════
    CONTACT
 ═══════════════════════════════════════════ */
-#contact { background:var(--bg) }
-.contact-wrap { display:grid; grid-template-columns:1fr 1.5fr; gap:64px; align-items:start }
-.c-left h3 { font-family:var(--serif); font-size:2rem; color:#fff; margin-bottom:12px; line-height:1.2 }
-.c-left p { font-size:0.95rem; color:var(--text2); line-height:1.75; margin-bottom:32px }
-.c-items { display:flex; flex-direction:column; gap:12px }
-.c-item {
-  display:flex; align-items:center; gap:14px;
-  background:var(--card); border:1px solid var(--border);
-  border-radius:var(--r-md); padding:14px 18px;
-  transition:all 0.25s;
-}
-.c-item:hover { border-color:rgba(59,130,246,0.3); transform:translateX(4px) }
-.c-icon-box {
-  width:40px; height:40px; border-radius:10px;
-  background:var(--blue-gg); border:1px solid rgba(59,130,246,0.2);
-  display:flex; align-items:center; justify-content:center;
-  color:var(--blue2); font-size:0.95rem; flex-shrink:0;
-}
-.c-item h4 { font-size:0.8rem; font-weight:700; color:#fff; margin-bottom:2px }
-.c-item a, .c-item span { font-size:0.78rem; color:var(--text2); transition:color 0.2s }
-.c-item a:hover { color:var(--blue2) }
+        #contact {
+            background: var(--bg)
+        }
 
-/* Form */
-.form-card {
-  background:var(--card); border:1px solid var(--border);
-  border-radius:var(--r-xl); padding:36px; position:relative; overflow:hidden;
-}
-.form-card::before {
-  content:''; position:absolute; top:0; left:0; right:0; height:1px;
-  background:linear-gradient(90deg, transparent, var(--blue), transparent);
-}
-.form-card h3 { font-size:1.15rem; font-weight:800; color:#fff; margin-bottom:24px }
-.form-row2 { display:grid; grid-template-columns:1fr 1fr; gap:16px }
-.fg { margin-bottom:16px }
-.fg label { display:block; font-size:0.78rem; font-weight:700; color:var(--text2); margin-bottom:8px; letter-spacing:0.04em }
-.fg input, .fg textarea {
-  width:100%; padding:12px 16px;
-  background:rgba(255,255,255,0.04); border:1px solid var(--border2);
-  border-radius:10px; font-family:var(--sans); font-size:0.9rem;
-  color:#fff; transition:all 0.25s;
-}
-.fg input::placeholder, .fg textarea::placeholder { color:var(--text3) }
-.fg input:focus, .fg textarea:focus {
-  outline:none; border-color:var(--blue);
-  background:rgba(59,130,246,0.05);
-  box-shadow:0 0 0 3px rgba(59,130,246,0.12);
-}
-.fg textarea { min-height:120px; resize:vertical }
-.sub-btn {
-  width:100%; padding:14px; border-radius:12px;
-  background:linear-gradient(135deg, var(--blue), #1d4ed8);
-  color:#fff; border:none; font-family:var(--sans);
-  font-weight:800; font-size:0.92rem; cursor:pointer;
-  display:flex; align-items:center; justify-content:center; gap:8px;
-  transition:all 0.25s; box-shadow:0 8px 24px rgba(59,130,246,0.3);
-}
-.sub-btn:hover { transform:translateY(-2px); box-shadow:0 16px 40px rgba(59,130,246,0.45) }
-.form-msg {
-  padding:10px 14px; border-radius:8px; font-size:0.85rem;
-  font-weight:600; margin-bottom:16px; display:none;
-}
-.form-msg.ok  { background:rgba(16,185,129,0.1); color:var(--emerald); border:1px solid rgba(16,185,129,0.2); display:block }
-.form-msg.err { background:rgba(244,63,94,0.1);  color:var(--rose);    border:1px solid rgba(244,63,94,0.2);   display:block }
+        .contact-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 64px;
+            align-items: start
+        }
 
-/* ═══════════════════════════════════════════
+        .c-left h3 {
+            font-family: var(--serif);
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 12px;
+            line-height: 1.2
+        }
+
+        .c-left p {
+            font-size: 0.95rem;
+            color: var(--text2);
+            line-height: 1.75;
+            margin-bottom: 32px
+        }
+
+        .c-items {
+            display: flex;
+            flex-direction: column;
+            gap: 12px
+        }
+
+        .c-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--r-md);
+            padding: 14px 18px;
+            transition: all 0.25s;
+        }
+
+        .c-item:hover {
+            border-color: rgba(59, 130, 246, 0.3);
+            transform: translateX(4px)
+        }
+
+        .c-icon-box {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: var(--blue-gg);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--blue2);
+            font-size: 0.95rem;
+            flex-shrink: 0;
+        }
+
+        .c-item h4 {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 2px
+        }
+
+        .c-item a,
+        .c-item span {
+            font-size: 0.78rem;
+            color: var(--text2);
+            transition: color 0.2s
+        }
+
+        .c-item a:hover {
+            color: var(--blue2)
+        }
+
+        /* Form */
+        .form-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--r-xl);
+            padding: 36px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--blue), transparent);
+        }
+
+        .form-card h3 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 24px
+        }
+
+        .form-row2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px
+        }
+
+        .fg {
+            margin-bottom: 16px
+        }
+
+        .fg label {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--text2);
+            margin-bottom: 8px;
+            letter-spacing: 0.04em
+        }
+
+        .fg input,
+        .fg textarea {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border2);
+            border-radius: 10px;
+            font-family: var(--sans);
+            font-size: 0.9rem;
+            color: #fff;
+            transition: all 0.25s;
+        }
+
+        .fg input::placeholder,
+        .fg textarea::placeholder {
+            color: var(--text3)
+        }
+
+        .fg input:focus,
+        .fg textarea:focus {
+            outline: none;
+            border-color: var(--blue);
+            background: rgba(59, 130, 246, 0.05);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+        }
+
+        .fg textarea {
+            min-height: 120px;
+            resize: vertical
+        }
+
+        .sub-btn {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--blue), #1d4ed8);
+            color: #fff;
+            border: none;
+            font-family: var(--sans);
+            font-weight: 800;
+            font-size: 0.92rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.25s;
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
+        }
+
+        .sub-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 40px rgba(59, 130, 246, 0.45)
+        }
+
+        .form-msg {
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: none;
+        }
+
+        .form-msg.ok {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--emerald);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            display: block
+        }
+
+        .form-msg.err {
+            background: rgba(244, 63, 94, 0.1);
+            color: var(--rose);
+            border: 1px solid rgba(244, 63, 94, 0.2);
+            display: block
+        }
+
+        /* ═══════════════════════════════════════════
    FOOTER
 ═══════════════════════════════════════════ */
-footer {
-  background:var(--bg2); border-top:1px solid var(--border);
-  padding:60px 0 32px;
-}
-.foot-wrap {
-  display:grid; grid-template-columns:1.6fr 1fr 1fr; gap:48px;
-  padding-bottom:48px; border-bottom:1px solid var(--border); margin-bottom:32px;
-}
-.foot-brand h3 {
-  font-family:var(--serif); font-size:1.5rem; color:#fff;
-  margin-bottom:10px; letter-spacing:-0.02em;
-}
-.foot-brand p { font-size:0.85rem; color:var(--text3); line-height:1.75; margin-bottom:20px }
-.foot-socials { display:flex; gap:10px }
-.foot-social {
-  width:36px; height:36px; border-radius:9px;
-  background:rgba(255,255,255,0.05); border:1px solid var(--border);
-  color:var(--text3); font-size:0.9rem;
-  display:flex; align-items:center; justify-content:center;
-  transition:all 0.2s;
-}
-.foot-social:hover { background:var(--blue); color:#fff; border-color:var(--blue); transform:translateY(-2px) }
-.foot-col h4 {
-  font-size:0.72rem; font-weight:700; text-transform:uppercase;
-  letter-spacing:0.1em; color:var(--text3); margin-bottom:20px;
-}
-.foot-col li { margin-bottom:10px }
-.foot-col a { font-size:0.85rem; color:var(--text3); transition:color 0.2s }
-.foot-col a:hover { color:#fff }
-.foot-copy { text-align:center; font-size:0.8rem; color:var(--text3) }
+        footer {
+            background: var(--bg2);
+            border-top: 1px solid var(--border);
+            padding: 60px 0 32px;
+        }
 
-/* ═══════════════════════════════════════════
+        .foot-wrap {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr 1fr;
+            gap: 48px;
+            padding-bottom: 48px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 32px;
+        }
+
+        .foot-brand h3 {
+            font-family: var(--serif);
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 10px;
+            letter-spacing: -0.02em;
+        }
+
+        .foot-brand p {
+            font-size: 0.85rem;
+            color: var(--text3);
+            line-height: 1.75;
+            margin-bottom: 20px
+        }
+
+        .foot-socials {
+            display: flex;
+            gap: 10px
+        }
+
+        .foot-social {
+            width: 36px;
+            height: 36px;
+            border-radius: 9px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: var(--text3);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .foot-social:hover {
+            background: var(--blue);
+            color: #fff;
+            border-color: var(--blue);
+            transform: translateY(-2px)
+        }
+
+        .foot-col h4 {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text3);
+            margin-bottom: 20px;
+        }
+
+        .foot-col li {
+            margin-bottom: 10px
+        }
+
+        .foot-col a {
+            font-size: 0.85rem;
+            color: var(--text3);
+            transition: color 0.2s
+        }
+
+        .foot-col a:hover {
+            color: #fff
+        }
+
+        .foot-copy {
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text3)
+        }
+
+        /* ═══════════════════════════════════════════
    BACK TO TOP
 ═══════════════════════════════════════════ */
-.back-top {
-  position:fixed; bottom:28px; right:28px;
-  width:44px; height:44px; background:var(--blue);
-  color:#fff; border-radius:12px; font-size:0.9rem;
-  display:flex; align-items:center; justify-content:center;
-  opacity:0; visibility:hidden; transition:all 0.3s;
-  box-shadow:0 8px 24px rgba(59,130,246,0.35); z-index:900;
-}
-.back-top.show { opacity:1; visibility:visible }
-.back-top:hover { background:#2563eb; transform:translateY(-3px) }
+        .back-top {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            width: 44px;
+            height: 44px;
+            background: var(--blue);
+            color: #fff;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.35);
+            z-index: 900;
+        }
 
-/* ═══════════════════════════════════════════
+        .back-top.show {
+            opacity: 1;
+            visibility: visible
+        }
+
+        .back-top:hover {
+            background: #2563eb;
+            transform: translateY(-3px)
+        }
+
+        /* ═══════════════════════════════════════════
    SECTION DIVIDER
 ═══════════════════════════════════════════ */
-.divider {
-  height:1px; background:linear-gradient(90deg, transparent, var(--border2), transparent);
-  margin:0;
-}
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border2), transparent);
+            margin: 0;
+        }
 
-/* ═══════════════════════════════════════════
+        /* ═══════════════════════════════════════════
    RESPONSIVE
 ═══════════════════════════════════════════ */
-@media(max-width:1100px){
-  .hero-inner { grid-template-columns:1fr; text-align:center }
-  .hero-left { align-items:center }
-  .hero-desc { text-align:center }
-  .hero-right { margin:0 auto; max-width:340px }
-  .stat-float:nth-child(2) { top:-10px; left:-20px }
-  .stat-float:nth-child(3) { right:-20px }
-  .proj-grid { grid-template-columns:repeat(2,1fr) }
-}
-@media(max-width:860px){
-  .about-wrap { grid-template-columns:1fr }
-  .contact-wrap { grid-template-columns:1fr }
-  .foot-wrap { grid-template-columns:1fr 1fr }
-  .tl { padding-left:52px }
-  .tl-icon { left:-52px; width:36px; height:36px }
-}
-@media(max-width:640px){
-  .proj-grid { grid-template-columns:1fr }
-  .form-row2 { grid-template-columns:1fr }
-  .hero-heading { font-size:2.6rem }
-  .nav-links { display:none }
-  .stat-grid { grid-template-columns:repeat(3,1fr) }
-  .foot-wrap { grid-template-columns:1fr }
-  .tl { padding-left:0 }
-  .tl::before { display:none }
-  .tl-icon { display:none }
-}
-</style>
+        @media(max-width:1100px) {
+            .hero-inner {
+                grid-template-columns: 1fr;
+                text-align: center
+            }
+
+            .hero-left {
+                align-items: center
+            }
+
+            .hero-desc {
+                text-align: center
+            }
+
+            .hero-right {
+                margin: 0 auto;
+                max-width: 340px
+            }
+
+            .stat-float:nth-child(2) {
+                top: -10px;
+                left: -20px
+            }
+
+            .stat-float:nth-child(3) {
+                right: -20px
+            }
+
+            .proj-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+        }
+
+        @media(max-width:860px) {
+            .about-wrap {
+                grid-template-columns: 1fr
+            }
+
+            .contact-wrap {
+                grid-template-columns: 1fr
+            }
+
+            .foot-wrap {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .tl {
+                padding-left: 52px
+            }
+
+            .tl-icon {
+                left: -52px;
+                width: 36px;
+                height: 36px
+            }
+        }
+
+        @media(max-width:640px) {
+            .proj-grid {
+                grid-template-columns: 1fr
+            }
+
+            .form-row2 {
+                grid-template-columns: 1fr
+            }
+
+            .hero-heading {
+                font-size: 2.6rem
+            }
+
+            .nav-links {
+                display: none
+            }
+
+            .stat-grid {
+                grid-template-columns: repeat(3, 1fr)
+            }
+
+            .foot-wrap {
+                grid-template-columns: 1fr
+            }
+
+            .tl {
+                padding-left: 0
+            }
+
+            .tl::before {
+                display: none
+            }
+
+            .tl-icon {
+                display: none
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-<!-- Cursor glow -->
-<div class="cursor-glow" id="cursorGlow"></div>
+    <!-- Cursor glow -->
+    <div class="cursor-glow" id="cursorGlow"></div>
 
-<!-- Loader -->
-<div id="loader">
-  <div class="loader-text">Loading portfolio</div>
-  <div class="loader-bar"></div>
-</div>
+    <!-- Loader -->
+    <div id="loader">
+        <div class="loader-text">Loading portfolio</div>
+        <div class="loader-bar"></div>
+    </div>
 
-<!-- ════════════════════════════════
+    <!-- ════════════════════════════════
      NAV
 ════════════════════════════════ -->
-<nav id="mainNav">
-  <div class="container nav-inner">
-    <div class="nav-logo">
-      <div class="nav-dot"></div>
-      <span>AKG</span><span>.</span>
-    </div>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <a href="mailto:akoffice2026@gmail.com" class="nav-links nav-hire">Hire Me</a>
-  </div>
-</nav>
+    <nav id="mainNav">
+        <div class="container nav-inner">
+            <div class="nav-logo">
+                <div class="nav-dot"></div>
+                <span>AKG</span><span>.</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="mailto:akoffice2026@gmail.com" class="nav-links nav-hire">Hire Me</a>
+        </div>
+    </nav>
 
-<!-- ════════════════════════════════
+    <!-- ════════════════════════════════
      HERO
 ════════════════════════════════ -->
-<section class="hero" id="hero">
-  <div class="hero-mesh">
-    <div class="mesh-blob"></div>
-    <div class="mesh-blob"></div>
-    <div class="mesh-blob"></div>
-  </div>
-  <div class="hero-grid"></div>
-  <div class="container">
-    <div class="hero-inner">
-      <!-- LEFT -->
-      <div class="hero-left">
-        <div class="hero-chip">Available for opportunities</div>
-        <h1 class="hero-heading">
-          Amit<br>Kumar <em>Gupta</em>
-        </h1>
-        <div class="hero-role">// Backend Developer &nbsp;·&nbsp; Laravel &nbsp;·&nbsp; PHP &nbsp;·&nbsp; Fintech &nbsp;·&nbsp; SaaS</div>
-        <p class="hero-desc">
-          <strong>4+ years</strong> building scalable fintech &amp; SaaS backends — from <strong>AEPS payment systems</strong> to multi-role enterprise CRM platforms. Clean architecture, real-world impact.
-        </p>
-        <div class="hero-pills">
-          <span class="hero-pill">Laravel / PHP</span>
-          <span class="hero-pill">Fintech APIs</span>
-          <span class="hero-pill">Role-Based Auth</span>
-          <span class="hero-pill">MySQL Design</span>
-          <span class="hero-pill">SaaS Platforms</span>
-          <span class="hero-pill">REST APIs</span>
+    <section class="hero" id="hero">
+        <div class="hero-mesh">
+            <div class="mesh-blob"></div>
+            <div class="mesh-blob"></div>
+            <div class="mesh-blob"></div>
         </div>
-        <div class="hero-btns">
-          <a href="#contact" class="btn-p btn-solid"><i class="fas fa-paper-plane"></i> Contact Me</a>
-          <a href="#projects" class="btn-p btn-ghost"><i class="fas fa-code"></i> View Projects</a>
-        </div>
-        <div class="hero-socials">
-          <a href="https://www.linkedin.com/in/backend-developer-amit" target="_blank" class="hero-social" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://github.com/guptakamit304" target="_blank" class="hero-social" aria-label="GitHub"><i class="fab fa-github"></i></a>
-          <a href="mailto:akoffice2026@gmail.com" class="hero-social" aria-label="Email"><i class="fas fa-envelope"></i></a>
-        </div>
-      </div>
+        <div class="hero-grid"></div>
+        <div class="container">
+            <div class="hero-inner">
+                <!-- LEFT -->
+                <div class="hero-left">
+                    <div class="hero-chip">Available for opportunities</div>
+                    <h1 class="hero-heading">
+                        Amit<br>Kumar <em>Gupta</em>
+                    </h1>
+                    <div class="hero-role">// Backend Developer &nbsp;·&nbsp; Laravel &nbsp;·&nbsp; PHP &nbsp;·&nbsp;
+                        Fintech &nbsp;·&nbsp; SaaS</div>
+                    <p class="hero-desc">
+                        <strong>4+ years</strong> building scalable fintech &amp; SaaS backends — from <strong>AEPS
+                            payment systems</strong> to multi-role enterprise CRM platforms. Clean architecture,
+                        real-world impact.
+                    </p>
+                    <div class="hero-pills">
+                        <span class="hero-pill">Laravel / PHP</span>
+                        <span class="hero-pill">Fintech APIs</span>
+                        <span class="hero-pill">Role-Based Auth</span>
+                        <span class="hero-pill">MySQL Design</span>
+                        <span class="hero-pill">SaaS Platforms</span>
+                        <span class="hero-pill">REST APIs</span>
+                    </div>
+                    <div class="hero-btns">
+                        <a href="#contact" class="btn-p btn-solid"><i class="fas fa-paper-plane"></i> Contact Me</a>
+                        <a href="#projects" class="btn-p btn-ghost"><i class="fas fa-code"></i> View Projects</a>
+                    </div>
+                    <div class="hero-socials">
+                        <a href="https://www.linkedin.com/in/backend-developer-amit" target="_blank" class="hero-social"
+                            aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://github.com/guptakamit304" target="_blank" class="hero-social"
+                            aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="mailto:akoffice2026@gmail.com" class="hero-social" aria-label="Email"><i
+                                class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
 
-      <!-- RIGHT -->
-      <div class="hero-right">
-        <div class="photo-card">
-          <img src="__PHOTO__" alt="Amit Kumar Gupta — Backend Developer">
-          <div class="photo-overlay"></div>
-          <div class="photo-badge">
-            <div class="badge-dot"></div>
-            <div>
-              <div class="badge-text">Open to Work</div>
-              <div class="badge-sub">Available from Now</div>
+                <!-- RIGHT -->
+                <div class="hero-right">
+                    <div class="photo-card">
+                        <img src="https://github.com/guptakamit304/guptakamit304.github.io/blob/main/amit-image.png" alt="Amit Kumar Gupta — Backend Developer">
+                        <div class="photo-overlay"></div>
+                        <div class="photo-badge">
+                            <div class="badge-dot"></div>
+                            <div>
+                                <div class="badge-text">Open to Work</div>
+                                <div class="badge-sub">Available from Now</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Floating stats -->
+                    <div class="stat-float" style="top:-20px;left:-70px">
+                        <div class="sf-num">4+</div>
+                        <div class="sf-label">Years Exp.</div>
+                    </div>
+                    <div class="stat-float" style="bottom:130px;right:-55px">
+                        <div class="sf-num">200+</div>
+                        <div class="sf-label">APIs Built</div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-        <!-- Floating stats -->
-        <div class="stat-float" style="top:-20px;left:-70px">
-          <div class="sf-num">4+</div>
-          <div class="sf-label">Years Exp.</div>
+        <div class="hero-scroll">
+            <div class="scroll-track">
+                <div class="scroll-thumb"></div>
+            </div>
+            <span>scroll</span>
         </div>
-        <div class="stat-float" style="bottom:130px;right:-55px">
-          <div class="sf-num">200+</div>
-          <div class="sf-label">APIs Built</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="hero-scroll">
-    <div class="scroll-track"><div class="scroll-thumb"></div></div>
-    <span>scroll</span>
-  </div>
-</section>
+    </section>
 
-<div class="divider"></div>
+    <div class="divider"></div>
 
-<!-- ════════════════════════════════
+    <!-- ════════════════════════════════
      ABOUT
 ════════════════════════════════ -->
-<section id="about">
-  <div class="container">
-    <div class="about-wrap">
-      <div class="about-text reveal">
-        <div class="s-eyebrow">Who I Am</div>
-        <h2 class="s-title">Backend Engineer &<br><em>Fintech Specialist</em></h2>
-        <p>I'm a backend developer with 4+ years of hands-on experience building <strong>fintech and SaaS platforms</strong> using Laravel and PHP. My work spans everything from AEPS, DMT, recharge, and travel API integrations to complex role-based admin panels for distributors, retailers, and API partners.</p>
-        <p>I design robust MySQL schemas, implement <strong>secure authentication flows</strong> with OTP and session management, and enforce code quality using Laravel Pint, PHPStan, and SonarQube. Currently focused on converting traditional PHP systems into structured, scalable Laravel architectures.</p>
-        <p>Beyond fintech, I've shipped <strong>10+ projects</strong> across healthcare, e-commerce, community platforms, and security SaaS — each one a chance to solve a real problem with clean engineering.</p>
-        <div class="stat-grid">
-          <div class="stat-card-inner">
-            <div class="stat-num">4+</div>
-            <div class="stat-lbl">Years Exp.</div>
-          </div>
-          <div class="stat-card-inner">
-            <div class="stat-num">10+</div>
-            <div class="stat-lbl">Projects</div>
-          </div>
-          <div class="stat-card-inner">
-            <div class="stat-num">200+</div>
-            <div class="stat-lbl">APIs Built</div>
-          </div>
-        </div>
-      </div>
+    <section id="about">
+        <div class="container">
+            <div class="about-wrap">
+                <div class="about-text reveal">
+                    <div class="s-eyebrow">Who I Am</div>
+                    <h2 class="s-title">Backend Engineer &<br><em>Fintech Specialist</em></h2>
+                    <p>I'm a backend developer with 4+ years of hands-on experience building <strong>fintech and SaaS
+                            platforms</strong> using Laravel and PHP. My work spans everything from AEPS, DMT, recharge,
+                        and travel API integrations to complex role-based admin panels for distributors, retailers, and
+                        API partners.</p>
+                    <p>I design robust MySQL schemas, implement <strong>secure authentication flows</strong> with OTP
+                        and session management, and enforce code quality using Laravel Pint, PHPStan, and SonarQube.
+                        Currently focused on converting traditional PHP systems into structured, scalable Laravel
+                        architectures.</p>
+                    <p>Beyond fintech, I've shipped <strong>10+ projects</strong> across healthcare, e-commerce,
+                        community platforms, and security SaaS — each one a chance to solve a real problem with clean
+                        engineering.</p>
+                    <div class="stat-grid">
+                        <div class="stat-card-inner">
+                            <div class="stat-num">4+</div>
+                            <div class="stat-lbl">Years Exp.</div>
+                        </div>
+                        <div class="stat-card-inner">
+                            <div class="stat-num">10+</div>
+                            <div class="stat-lbl">Projects</div>
+                        </div>
+                        <div class="stat-card-inner">
+                            <div class="stat-num">200+</div>
+                            <div class="stat-lbl">APIs Built</div>
+                        </div>
+                    </div>
+                </div>
 
-      <div class="skills-wrap reveal" style="transition-delay:0.15s">
-        <div class="skill-group">
-          <div class="skill-group-title c-blue"><i class="fas fa-server"></i> Backend &amp; Frameworks</div>
-          <div class="tags">
-            <span class="tag blue">Laravel</span>
-            <span class="tag blue">PHP</span>
-            <span class="tag blue">Node.js</span>
-            <span class="tag blue">Express.js</span>
-            <span class="tag blue">REST APIs</span>
-            <span class="tag blue">Queue / Jobs</span>
-          </div>
+                <div class="skills-wrap reveal" style="transition-delay:0.15s">
+                    <div class="skill-group">
+                        <div class="skill-group-title c-blue"><i class="fas fa-server"></i> Backend &amp; Frameworks
+                        </div>
+                        <div class="tags">
+                            <span class="tag blue">Laravel</span>
+                            <span class="tag blue">PHP</span>
+                            <span class="tag blue">Node.js</span>
+                            <span class="tag blue">Express.js</span>
+                            <span class="tag blue">REST APIs</span>
+                            <span class="tag blue">Queue / Jobs</span>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <div class="skill-group-title c-green"><i class="fas fa-database"></i> Database &amp; Storage
+                        </div>
+                        <div class="tags">
+                            <span class="tag green">MySQL</span>
+                            <span class="tag green">MongoDB</span>
+                            <span class="tag green">Redis</span>
+                            <span class="tag green">Schema Design</span>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <div class="skill-group-title c-gold"><i class="fas fa-rupee-sign"></i> Fintech Specialisation
+                        </div>
+                        <div class="tags">
+                            <span class="tag gold">AEPS</span>
+                            <span class="tag gold">DMT</span>
+                            <span class="tag gold">Recharge APIs</span>
+                            <span class="tag gold">Travel APIs</span>
+                            <span class="tag gold">Insurance</span>
+                            <span class="tag gold">Wallet Logic</span>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <div class="skill-group-title c-gray"><i class="fas fa-tools"></i> Tools &amp; Quality</div>
+                        <div class="tags">
+                            <span class="tag gray">Laravel Pint</span>
+                            <span class="tag gray">PHPStan</span>
+                            <span class="tag gray">SonarQube</span>
+                            <span class="tag gray">Firebase</span>
+                            <span class="tag gray">Git</span>
+                            <span class="tag gray">Docker</span>
+                            <span class="tag gray">AJAX / JS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="skill-group">
-          <div class="skill-group-title c-green"><i class="fas fa-database"></i> Database &amp; Storage</div>
-          <div class="tags">
-            <span class="tag green">MySQL</span>
-            <span class="tag green">MongoDB</span>
-            <span class="tag green">Redis</span>
-            <span class="tag green">Schema Design</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <div class="skill-group-title c-gold"><i class="fas fa-rupee-sign"></i> Fintech Specialisation</div>
-          <div class="tags">
-            <span class="tag gold">AEPS</span>
-            <span class="tag gold">DMT</span>
-            <span class="tag gold">Recharge APIs</span>
-            <span class="tag gold">Travel APIs</span>
-            <span class="tag gold">Insurance</span>
-            <span class="tag gold">Wallet Logic</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <div class="skill-group-title c-gray"><i class="fas fa-tools"></i> Tools &amp; Quality</div>
-          <div class="tags">
-            <span class="tag gray">Laravel Pint</span>
-            <span class="tag gray">PHPStan</span>
-            <span class="tag gray">SonarQube</span>
-            <span class="tag gray">Firebase</span>
-            <span class="tag gray">Git</span>
-            <span class="tag gray">Docker</span>
-            <span class="tag gray">AJAX / JS</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<div class="divider"></div>
+    <div class="divider"></div>
 
-<!-- ════════════════════════════════
+    <!-- ════════════════════════════════
      EXPERIENCE
 ════════════════════════════════ -->
-<section id="experience">
-  <div class="container">
-    <div class="s-header reveal">
-      <div class="s-eyebrow">Career</div>
-      <h2 class="s-title">Professional <em>Experience</em></h2>
-      <p class="s-sub">A track record of shipping real products at scale across fintech, SaaS, and enterprise domains.</p>
-    </div>
-    <div class="tl">
-
-      <div class="tl-item reveal">
-        <div class="tl-icon"><i class="fas fa-building"></i></div>
-        <div class="tl-card">
-          <div class="tl-top">
-            <div>
-              <div class="tl-role">Backend Developer — Fintech</div>
-              <div class="tl-company">Current Company &middot; Prayagraj, UP</div>
+    <section id="experience">
+        <div class="container">
+            <div class="s-header reveal">
+                <div class="s-eyebrow">Career</div>
+                <h2 class="s-title">Professional <em>Experience</em></h2>
+                <p class="s-sub">A track record of shipping real products at scale across fintech, SaaS, and
+                    enterprise domains.</p>
             </div>
-            <span class="tl-date">2024 – Present</span>
-          </div>
-          <div class="tl-body">
-            <p>Building and maintaining a Laravel-based fintech platform covering AEPS, DMT, recharge, travel, and insurance. Architecting role-based systems for retailers, distributors, master distributors, and API partners.</p>
-            <ul>
-              <li>Designed complex MySQL schemas for KYC, wallet, and transaction management</li>
-              <li>Implemented secure OTP login, session handling, and permission-based access control</li>
-              <li>Enforcing code quality via Laravel Pint, PHPStan, and SonarQube pipelines</li>
-              <li>Integrating third-party fintech APIs and managing webhook flows</li>
-            </ul>
-          </div>
-          <div class="tl-chips">
-            <span class="tl-chip">Laravel</span><span class="tl-chip">PHP</span><span class="tl-chip">MySQL</span><span class="tl-chip">AEPS</span><span class="tl-chip">DMT</span><span class="tl-chip">PHPStan</span><span class="tl-chip">SonarQube</span>
-          </div>
-        </div>
-      </div>
+            <div class="tl">
 
-      <div class="tl-item reveal">
-        <div class="tl-icon"><i class="fas fa-laptop-code"></i></div>
-        <div class="tl-card">
-          <div class="tl-top">
-            <div>
-              <div class="tl-role">Backend Developer</div>
-              <div class="tl-company">HindtechItSolutions</div>
+                <div class="tl-item reveal">
+                    <div class="tl-icon"><i class="fas fa-building"></i></div>
+                    <div class="tl-card">
+                        <div class="tl-top">
+                            <div>
+                                <div class="tl-role">Backend Developer — Fintech</div>
+                                <div class="tl-company">Current Company &middot; Prayagraj, UP</div>
+                            </div>
+                            <span class="tl-date">2024 – Present</span>
+                        </div>
+                        <div class="tl-body">
+                            <p>Building and maintaining a Laravel-based fintech platform covering AEPS, DMT, recharge,
+                                travel, and insurance. Architecting role-based systems for retailers, distributors,
+                                master distributors, and API partners.</p>
+                            <ul>
+                                <li>Designed complex MySQL schemas for KYC, wallet, and transaction management</li>
+                                <li>Implemented secure OTP login, session handling, and permission-based access control
+                                </li>
+                                <li>Enforcing code quality via Laravel Pint, PHPStan, and SonarQube pipelines</li>
+                                <li>Integrating third-party fintech APIs and managing webhook flows</li>
+                            </ul>
+                        </div>
+                        <div class="tl-chips">
+                            <span class="tl-chip">Laravel</span><span class="tl-chip">PHP</span><span
+                                class="tl-chip">MySQL</span><span class="tl-chip">AEPS</span><span
+                                class="tl-chip">DMT</span><span class="tl-chip">PHPStan</span><span
+                                class="tl-chip">SonarQube</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tl-item reveal">
+                    <div class="tl-icon"><i class="fas fa-laptop-code"></i></div>
+                    <div class="tl-card">
+                        <div class="tl-top">
+                            <div>
+                                <div class="tl-role">Backend Developer</div>
+                                <div class="tl-company">HindtechItSolutions</div>
+                            </div>
+                            <span class="tl-date">Oct 2023 – Aug 2024</span>
+                        </div>
+                        <div class="tl-body">
+                            <p>Delivered multiple client projects including a Canadian security SaaS, e-commerce
+                                platform, and a spiritual services app. Full backend development and API architecture
+                                for each.</p>
+                            <ul>
+                                <li>Built Canada Boots Security with Google Maps, Firebase notifications, cron jobs, and
+                                    real-time APIs</li>
+                                <li>Developed e-commerce management app with order tracking and advanced admin filters
+                                </li>
+                                <li>Created Pujari Ji — spiritual services app with pooja booking, astrology, and
+                                    Panchang</li>
+                            </ul>
+                        </div>
+                        <div class="tl-chips">
+                            <span class="tl-chip">Laravel</span><span class="tl-chip">PHP</span><span
+                                class="tl-chip">Firebase</span><span class="tl-chip">Google Maps API</span><span
+                                class="tl-chip">MySQL</span><span class="tl-chip">Cron Jobs</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tl-item reveal">
+                    <div class="tl-icon"><i class="fas fa-code"></i></div>
+                    <div class="tl-card">
+                        <div class="tl-top">
+                            <div>
+                                <div class="tl-role">PHP / Laravel Developer</div>
+                                <div class="tl-company">Mind You Infotech Private Limited</div>
+                            </div>
+                            <span class="tl-date">May 2022 – Sep 2023</span>
+                        </div>
+                        <div class="tl-body">
+                            <p>Built 7+ diverse products from scratch — community platforms, healthcare booking, CRM,
+                                project management, vendor tools, and construction portals. Wrote 200+ APIs across
+                                projects.</p>
+                            <ul>
+                                <li>Community app with 200+ APIs — news, events, blood donation, matrimony, Firebase
+                                    notifications</li>
+                                <li>Doctor Appointment system using Laravel queues for bulk cancellations and
+                                    rescheduling</li>
+                                <li>CRM with HR, accounts, billing modules; Short-X vendor WhatsApp order management
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tl-chips">
+                            <span class="tl-chip">Laravel</span><span class="tl-chip">PHP</span><span
+                                class="tl-chip">MySQL</span><span class="tl-chip">Firebase</span><span
+                                class="tl-chip">CRM</span><span class="tl-chip">REST APIs</span><span
+                                class="tl-chip">AJAX</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            <span class="tl-date">Oct 2023 – Aug 2024</span>
-          </div>
-          <div class="tl-body">
-            <p>Delivered multiple client projects including a Canadian security SaaS, e-commerce platform, and a spiritual services app. Full backend development and API architecture for each.</p>
-            <ul>
-              <li>Built Canada Boots Security with Google Maps, Firebase notifications, cron jobs, and real-time APIs</li>
-              <li>Developed e-commerce management app with order tracking and advanced admin filters</li>
-              <li>Created Pujari Ji — spiritual services app with pooja booking, astrology, and Panchang</li>
-            </ul>
-          </div>
-          <div class="tl-chips">
-            <span class="tl-chip">Laravel</span><span class="tl-chip">PHP</span><span class="tl-chip">Firebase</span><span class="tl-chip">Google Maps API</span><span class="tl-chip">MySQL</span><span class="tl-chip">Cron Jobs</span>
-          </div>
         </div>
-      </div>
+    </section>
 
-      <div class="tl-item reveal">
-        <div class="tl-icon"><i class="fas fa-code"></i></div>
-        <div class="tl-card">
-          <div class="tl-top">
-            <div>
-              <div class="tl-role">PHP / Laravel Developer</div>
-              <div class="tl-company">Mind You Infotech Private Limited</div>
-            </div>
-            <span class="tl-date">May 2022 – Sep 2023</span>
-          </div>
-          <div class="tl-body">
-            <p>Built 7+ diverse products from scratch — community platforms, healthcare booking, CRM, project management, vendor tools, and construction portals. Wrote 200+ APIs across projects.</p>
-            <ul>
-              <li>Community app with 200+ APIs — news, events, blood donation, matrimony, Firebase notifications</li>
-              <li>Doctor Appointment system using Laravel queues for bulk cancellations and rescheduling</li>
-              <li>CRM with HR, accounts, billing modules; Short-X vendor WhatsApp order management</li>
-            </ul>
-          </div>
-          <div class="tl-chips">
-            <span class="tl-chip">Laravel</span><span class="tl-chip">PHP</span><span class="tl-chip">MySQL</span><span class="tl-chip">Firebase</span><span class="tl-chip">CRM</span><span class="tl-chip">REST APIs</span><span class="tl-chip">AJAX</span>
-          </div>
-        </div>
-      </div>
+    <div class="divider"></div>
 
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- ════════════════════════════════
+    <!-- ════════════════════════════════
      PROJECTS
 ════════════════════════════════ -->
-<section id="projects">
-  <div class="container">
-    <div class="s-header center reveal">
-      <div class="s-eyebrow">Work</div>
-      <h2 class="s-title">Featured <em>Projects</em></h2>
-      <p class="s-sub">Real products shipped across fintech, healthcare, security SaaS, e-commerce, and community platforms.</p>
-    </div>
+    <section id="projects">
+        <div class="container">
+            <div class="s-header center reveal">
+                <div class="s-eyebrow">Work</div>
+                <h2 class="s-title">Featured <em>Projects</em></h2>
+                <p class="s-sub">Real products shipped across fintech, healthcare, security SaaS, e-commerce, and
+                    community platforms.</p>
+            </div>
 
-    <div class="filter-row reveal">
-      <button class="f-btn active" data-filter="all">All Projects</button>
-      <button class="f-btn" data-filter="fintech">Fintech</button>
-      <button class="f-btn" data-filter="saas">SaaS</button>
-      <button class="f-btn" data-filter="ecommerce">E-Commerce</button>
-      <button class="f-btn" data-filter="community">Community</button>
-    </div>
+            <div class="filter-row reveal">
+                <button class="f-btn active" data-filter="all">All Projects</button>
+                <button class="f-btn" data-filter="fintech">Fintech</button>
+                <button class="f-btn" data-filter="saas">SaaS</button>
+                <button class="f-btn" data-filter="ecommerce">E-Commerce</button>
+                <button class="f-btn" data-filter="community">Community</button>
+            </div>
 
-    <div class="proj-grid">
+            <div class="proj-grid">
 
-      <div class="p-card reveal" data-category="saas">
-        <div class="p-accent blue"></div>
-        <div class="p-body">
-          <div class="p-icon-wrap blue"><i class="fas fa-shield-alt"></i></div>
-          <div class="p-period">Feb 2024 – Aug 2024 · HindtechItSolutions</div>
-          <div class="p-name">Canada Boots Security</div>
-          <div class="p-company">Security Agency SaaS · Ontario, Canada</div>
-          <p class="p-desc">Full-stack security agency platform with real-time guard tracking, multi-login systems, and SaaS ops for manned guarding, mobile patrols, and alarm response teams.</p>
-          <div class="p-tags">
-            <span class="p-tag">Laravel</span><span class="p-tag">Google Maps</span><span class="p-tag">Firebase</span><span class="p-tag">Cron Jobs</span><span class="p-tag">Real-Time APIs</span>
-          </div>
-          <div class="p-foot">
-            <a href="https://bootssecurity.ca" target="_blank" class="p-link"><i class="fas fa-external-link-alt"></i> View Live</a>
-            <span class="p-cat">SaaS · Canada</span>
-          </div>
+                <div class="p-card reveal" data-category="saas">
+                    <div class="p-accent blue"></div>
+                    <div class="p-body">
+                        <div class="p-icon-wrap blue"><i class="fas fa-shield-alt"></i></div>
+                        <div class="p-period">Feb 2024 – Aug 2024 · HindtechItSolutions</div>
+                        <div class="p-name">Canada Boots Security</div>
+                        <div class="p-company">Security Agency SaaS · Ontario, Canada</div>
+                        <p class="p-desc">Full-stack security agency platform with real-time guard tracking,
+                            multi-login systems, and SaaS ops for manned guarding, mobile patrols, and alarm response
+                            teams.</p>
+                        <div class="p-tags">
+                            <span class="p-tag">Laravel</span><span class="p-tag">Google Maps</span><span
+                                class="p-tag">Firebase</span><span class="p-tag">Cron Jobs</span><span
+                                class="p-tag">Real-Time APIs</span>
+                        </div>
+                        <div class="p-foot">
+                            <a href="https://bootssecurity.ca" target="_blank" class="p-link"><i
+                                    class="fas fa-external-link-alt"></i> View Live</a>
+                            <span class="p-cat">SaaS · Canada</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-card reveal" data-category="ecommerce" style="transition-delay:0.08s">
+                    <div class="p-accent green"></div>
+                    <div class="p-body">
+                        <div class="p-icon-wrap green"><i class="fas fa-shopping-cart"></i></div>
+                        <div class="p-period">Feb 2024 – Mar 2024 · HindtechItSolutions</div>
+                        <div class="p-name">Ecommerce Management</div>
+                        <div class="p-company">Amit Enterprises Daliganj</div>
+                        <p class="p-desc">Complete e-commerce platform with product display, real-time order tracking,
+                            delivery management, advanced admin filters, and instant push notifications.</p>
+                        <div class="p-tags">
+                            <span class="p-tag">Laravel</span><span class="p-tag">MySQL</span><span
+                                class="p-tag">Firebase</span><span class="p-tag">Order Tracking</span>
+                        </div>
+                        <div class="p-foot">
+                            <a href="https://amitenterprisesdaliganj.com/" target="_blank" class="p-link"><i
+                                    class="fas fa-external-link-alt"></i> View Live</a>
+                            <span class="p-cat">E-Commerce</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-card reveal" data-category="saas" style="transition-delay:0.16s">
+                    <div class="p-accent gold"></div>
+                    <div class="p-body">
+                        <div class="p-icon-wrap gold"><i class="fas fa-om"></i></div>
+                        <div class="p-period">Oct 2023 – Dec 2023 · HindtechItSolutions</div>
+                        <div class="p-name">Pujari Ji</div>
+                        <div class="p-company">Spiritual Services App · Google Play</div>
+                        <p class="p-desc">Holistic spiritual app — online/offline Pooja rituals, personalized
+                            astrology, Katha narrations, Kundali analysis, temple services, and Panchang.</p>
+                        <div class="p-tags">
+                            <span class="p-tag">Laravel</span><span class="p-tag">MySQL</span><span
+                                class="p-tag">Mobile API</span><span class="p-tag">Booking System</span>
+                        </div>
+                        <div class="p-foot">
+                            <a href="https://play.google.com" target="_blank" class="p-link"><i
+                                    class="fab fa-google-play"></i> Google Play</a>
+                            <span class="p-cat">Mobile App</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-card reveal" data-category="saas" style="transition-delay:0.04s">
+                    <div class="p-accent cyan"></div>
+                    <div class="p-body">
+                        <div class="p-icon-wrap cyan"><i class="fas fa-stethoscope"></i></div>
+                        <div class="p-period">Aug 2023 · Mind You Infotech</div>
+                        <div class="p-name">Doctor Appointment</div>
+                        <div class="p-company">Healthcare Booking Platform</div>
+                        <p class="p-desc">Appointment booking for Regular &amp; Specialist doctors with slot
+                            management, bulk notifications, and Laravel queue for cancellations and rescheduling.</p>
+                        <div class="p-tags">
+                            <span class="p-tag">Laravel</span><span class="p-tag">Queue / Jobs</span><span
+                                class="p-tag">MySQL</span><span class="p-tag">Slot Management</span>
+                        </div>
+                        <div class="p-foot">
+                            <span class="p-link" style="cursor:default"><i class="fas fa-hospital"></i>
+                                Healthcare</span>
+                            <span class="p-cat">Laravel Queues</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-card reveal" data-category="saas" style="transition-delay:0.12s">
+                    <div class="p-accent purple"></div>
+                    <div class="p-body">
+                        <div class="p-icon-wrap purple"><i class="fas fa-users-cog"></i></div>
+                        <div class="p-period">Feb 2023 – Apr 2023 · Mind You Infotech</div>
+                        <div class="p-name">CRM Platform</div>
+                        <div class="p-company">Enterprise Office Management</div>
+                        <p class="p-desc">Full-featured CRM with HR, accounts, billing, and employee management.
+                            Section-based roles with a centralized admin panel controlling all modules.</p>
+                        <div class="p-tags">
+                            <span class="p-tag">Laravel</span><span class="p-tag">Laravel Modules</span><span
+                                class="p-tag">MySQL</span><span class="p-tag">Role-Based Auth</span>
+                        </div>
+                        <div class="p-foot">
+                            <span class="p-link" style="cursor:default"><i class="fas fa-chart-line"></i> CRM</span>
+                            <span class="p-cat">Enterprise SaaS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-card reveal" data-category="community" style="transition-delay:0.2s">
+                    <div class="p-accent rose"></div>
+                    <div class="p-body">
+                        <div class="p-icon-wrap rose"><i class="fas fa-people-group"></i></div>
+                        <div class="p-period">Dec 2022 – Feb 2023 · Mind You Infotech</div>
+                        <div class="p-name">Community Platform</div>
+                        <div class="p-company">Social &amp; Community Application</div>
+                        <p class="p-desc">Feature-rich community app: news, events, blood donation, forum, job portal,
+                            matrimony management — 200+ APIs with Firebase notifications.</p>
+                        <div class="p-tags">
+                            <span class="p-tag">Laravel</span><span class="p-tag">Firebase</span><span
+                                class="p-tag">200+ APIs</span><span class="p-tag">MySQL</span>
+                        </div>
+                        <div class="p-foot">
+                            <span class="p-link" style="cursor:default"><i class="fas fa-network-wired"></i>
+                                Community</span>
+                            <span class="p-cat">200+ APIs</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-card reveal" data-category="ecommerce">
+                    <div class="p-accent green"></div>
+                    <div class="p-body">
+                        <div class="p-icon-wrap green"><i class="fab fa-whatsapp"></i></div>
+                        <div class="p-period">Sep 2023 · Mind You Infotech</div>
+                        <div class="p-name">Short-X</div>
+                        <div class="p-company">Vendor Stock &amp; Order Management</div>
+                        <p class="p-desc">Vendor management tool with stock tracking and instant reorder via WhatsApp
+                            or call. One-click distributor reminders. All APIs built from scratch.</p>
+                        <div class="p-tags">
+                            <span class="p-tag">PHP</span><span class="p-tag">WhatsApp API</span><span
+                                class="p-tag">Stock Management</span>
+                        </div>
+                        <div class="p-foot">
+                            <span class="p-link" style="cursor:default"><i class="fas fa-boxes"></i> Inventory</span>
+                            <span class="p-cat">Client Delivered</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-card reveal" data-category="saas" style="transition-delay:0.08s">
+                    <div class="p-accent blue"></div>
+                    <div class="p-body">
+                        <div class="p-icon-wrap blue"><i class="fas fa-tasks"></i></div>
+                        <div class="p-period">Sep 2023 · Mind You Infotech</div>
+                        <div class="p-name">Project Management</div>
+                        <div class="p-company">Internal Task &amp; QR System</div>
+                        <p class="p-desc">Task management with bulk assignment, QR-code-based scanning, and repeat task
+                            scheduling. Employees update status via self-generated QR codes.</p>
+                        <div class="p-tags">
+                            <span class="p-tag">Laravel</span><span class="p-tag">QR Code</span><span
+                                class="p-tag">MySQL</span><span class="p-tag">Bulk Assignment</span>
+                        </div>
+                        <div class="p-foot">
+                            <span class="p-link" style="cursor:default"><i class="fas fa-qrcode"></i> Task
+                                Mgmt</span>
+                            <span class="p-cat">Laravel</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-card reveal" data-category="community" style="transition-delay:0.16s">
+                    <div class="p-accent purple"></div>
+                    <div class="p-body">
+                        <div class="p-icon-wrap purple"><i class="fas fa-comments"></i></div>
+                        <div class="p-period">Jul 2022 – Sep 2022 · Mind You Infotech</div>
+                        <div class="p-name">My Counselor</div>
+                        <div class="p-company">Astrology &amp; Counseling App</div>
+                        <p class="p-desc">Counseling platform connecting users with astrologers via voice and chat.
+                            Wallet management, session continuity, and availability control.</p>
+                        <div class="p-tags">
+                            <span class="p-tag">Laravel</span><span class="p-tag">Voice &amp; Chat</span><span
+                                class="p-tag">Wallet</span><span class="p-tag">Session Mgmt</span>
+                        </div>
+                        <div class="p-foot">
+                            <span class="p-link" style="cursor:default"><i class="fas fa-star"></i> Astrology</span>
+                            <span class="p-cat">App Store</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
-      </div>
+    </section>
 
-      <div class="p-card reveal" data-category="ecommerce" style="transition-delay:0.08s">
-        <div class="p-accent green"></div>
-        <div class="p-body">
-          <div class="p-icon-wrap green"><i class="fas fa-shopping-cart"></i></div>
-          <div class="p-period">Feb 2024 – Mar 2024 · HindtechItSolutions</div>
-          <div class="p-name">Ecommerce Management</div>
-          <div class="p-company">Amit Enterprises Daliganj</div>
-          <p class="p-desc">Complete e-commerce platform with product display, real-time order tracking, delivery management, advanced admin filters, and instant push notifications.</p>
-          <div class="p-tags">
-            <span class="p-tag">Laravel</span><span class="p-tag">MySQL</span><span class="p-tag">Firebase</span><span class="p-tag">Order Tracking</span>
-          </div>
-          <div class="p-foot">
-            <a href="https://amitenterprisesdaliganj.com/" target="_blank" class="p-link"><i class="fas fa-external-link-alt"></i> View Live</a>
-            <span class="p-cat">E-Commerce</span>
-          </div>
-        </div>
-      </div>
+    <div class="divider"></div>
 
-      <div class="p-card reveal" data-category="saas" style="transition-delay:0.16s">
-        <div class="p-accent gold"></div>
-        <div class="p-body">
-          <div class="p-icon-wrap gold"><i class="fas fa-om"></i></div>
-          <div class="p-period">Oct 2023 – Dec 2023 · HindtechItSolutions</div>
-          <div class="p-name">Pujari Ji</div>
-          <div class="p-company">Spiritual Services App · Google Play</div>
-          <p class="p-desc">Holistic spiritual app — online/offline Pooja rituals, personalized astrology, Katha narrations, Kundali analysis, temple services, and Panchang.</p>
-          <div class="p-tags">
-            <span class="p-tag">Laravel</span><span class="p-tag">MySQL</span><span class="p-tag">Mobile API</span><span class="p-tag">Booking System</span>
-          </div>
-          <div class="p-foot">
-            <a href="https://play.google.com" target="_blank" class="p-link"><i class="fab fa-google-play"></i> Google Play</a>
-            <span class="p-cat">Mobile App</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="p-card reveal" data-category="saas" style="transition-delay:0.04s">
-        <div class="p-accent cyan"></div>
-        <div class="p-body">
-          <div class="p-icon-wrap cyan"><i class="fas fa-stethoscope"></i></div>
-          <div class="p-period">Aug 2023 · Mind You Infotech</div>
-          <div class="p-name">Doctor Appointment</div>
-          <div class="p-company">Healthcare Booking Platform</div>
-          <p class="p-desc">Appointment booking for Regular &amp; Specialist doctors with slot management, bulk notifications, and Laravel queue for cancellations and rescheduling.</p>
-          <div class="p-tags">
-            <span class="p-tag">Laravel</span><span class="p-tag">Queue / Jobs</span><span class="p-tag">MySQL</span><span class="p-tag">Slot Management</span>
-          </div>
-          <div class="p-foot">
-            <span class="p-link" style="cursor:default"><i class="fas fa-hospital"></i> Healthcare</span>
-            <span class="p-cat">Laravel Queues</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="p-card reveal" data-category="saas" style="transition-delay:0.12s">
-        <div class="p-accent purple"></div>
-        <div class="p-body">
-          <div class="p-icon-wrap purple"><i class="fas fa-users-cog"></i></div>
-          <div class="p-period">Feb 2023 – Apr 2023 · Mind You Infotech</div>
-          <div class="p-name">CRM Platform</div>
-          <div class="p-company">Enterprise Office Management</div>
-          <p class="p-desc">Full-featured CRM with HR, accounts, billing, and employee management. Section-based roles with a centralized admin panel controlling all modules.</p>
-          <div class="p-tags">
-            <span class="p-tag">Laravel</span><span class="p-tag">Laravel Modules</span><span class="p-tag">MySQL</span><span class="p-tag">Role-Based Auth</span>
-          </div>
-          <div class="p-foot">
-            <span class="p-link" style="cursor:default"><i class="fas fa-chart-line"></i> CRM</span>
-            <span class="p-cat">Enterprise SaaS</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="p-card reveal" data-category="community" style="transition-delay:0.2s">
-        <div class="p-accent rose"></div>
-        <div class="p-body">
-          <div class="p-icon-wrap rose"><i class="fas fa-people-group"></i></div>
-          <div class="p-period">Dec 2022 – Feb 2023 · Mind You Infotech</div>
-          <div class="p-name">Community Platform</div>
-          <div class="p-company">Social &amp; Community Application</div>
-          <p class="p-desc">Feature-rich community app: news, events, blood donation, forum, job portal, matrimony management — 200+ APIs with Firebase notifications.</p>
-          <div class="p-tags">
-            <span class="p-tag">Laravel</span><span class="p-tag">Firebase</span><span class="p-tag">200+ APIs</span><span class="p-tag">MySQL</span>
-          </div>
-          <div class="p-foot">
-            <span class="p-link" style="cursor:default"><i class="fas fa-network-wired"></i> Community</span>
-            <span class="p-cat">200+ APIs</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="p-card reveal" data-category="ecommerce">
-        <div class="p-accent green"></div>
-        <div class="p-body">
-          <div class="p-icon-wrap green"><i class="fab fa-whatsapp"></i></div>
-          <div class="p-period">Sep 2023 · Mind You Infotech</div>
-          <div class="p-name">Short-X</div>
-          <div class="p-company">Vendor Stock &amp; Order Management</div>
-          <p class="p-desc">Vendor management tool with stock tracking and instant reorder via WhatsApp or call. One-click distributor reminders. All APIs built from scratch.</p>
-          <div class="p-tags">
-            <span class="p-tag">PHP</span><span class="p-tag">WhatsApp API</span><span class="p-tag">Stock Management</span>
-          </div>
-          <div class="p-foot">
-            <span class="p-link" style="cursor:default"><i class="fas fa-boxes"></i> Inventory</span>
-            <span class="p-cat">Client Delivered</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="p-card reveal" data-category="saas" style="transition-delay:0.08s">
-        <div class="p-accent blue"></div>
-        <div class="p-body">
-          <div class="p-icon-wrap blue"><i class="fas fa-tasks"></i></div>
-          <div class="p-period">Sep 2023 · Mind You Infotech</div>
-          <div class="p-name">Project Management</div>
-          <div class="p-company">Internal Task &amp; QR System</div>
-          <p class="p-desc">Task management with bulk assignment, QR-code-based scanning, and repeat task scheduling. Employees update status via self-generated QR codes.</p>
-          <div class="p-tags">
-            <span class="p-tag">Laravel</span><span class="p-tag">QR Code</span><span class="p-tag">MySQL</span><span class="p-tag">Bulk Assignment</span>
-          </div>
-          <div class="p-foot">
-            <span class="p-link" style="cursor:default"><i class="fas fa-qrcode"></i> Task Mgmt</span>
-            <span class="p-cat">Laravel</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="p-card reveal" data-category="community" style="transition-delay:0.16s">
-        <div class="p-accent purple"></div>
-        <div class="p-body">
-          <div class="p-icon-wrap purple"><i class="fas fa-comments"></i></div>
-          <div class="p-period">Jul 2022 – Sep 2022 · Mind You Infotech</div>
-          <div class="p-name">My Counselor</div>
-          <div class="p-company">Astrology &amp; Counseling App</div>
-          <p class="p-desc">Counseling platform connecting users with astrologers via voice and chat. Wallet management, session continuity, and availability control.</p>
-          <div class="p-tags">
-            <span class="p-tag">Laravel</span><span class="p-tag">Voice &amp; Chat</span><span class="p-tag">Wallet</span><span class="p-tag">Session Mgmt</span>
-          </div>
-          <div class="p-foot">
-            <span class="p-link" style="cursor:default"><i class="fas fa-star"></i> Astrology</span>
-            <span class="p-cat">App Store</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- ════════════════════════════════
+    <!-- ════════════════════════════════
      CONTACT
 ════════════════════════════════ -->
-<section id="contact">
-  <div class="container">
-    <div class="s-header reveal">
-      <div class="s-eyebrow">Let's Talk</div>
-      <h2 class="s-title">Get In <em>Touch</em></h2>
-      <p class="s-sub">Have a project in mind or want to collaborate? I'd love to hear from you.</p>
-    </div>
-    <div class="contact-wrap">
-      <div class="c-left reveal">
-        <h3>Let's build something solid together.</h3>
-        <p>Whether it's a fintech platform, SaaS backend, or API architecture — I bring clean code and practical engineering to every project.</p>
-        <div class="c-items">
-          <div class="c-item">
-            <div class="c-icon-box"><i class="fas fa-envelope"></i></div>
-            <div><h4>Email</h4><a href="mailto:akoffice2026@gmail.com">akoffice2026@gmail.com</a></div>
-          </div>
-          <div class="c-item">
-            <div class="c-icon-box"><i class="fab fa-linkedin-in"></i></div>
-            <div><h4>LinkedIn</h4><a href="https://www.linkedin.com/in/backend-developer-amit" target="_blank">linkedin.com/in/backend-developer-amit</a></div>
-          </div>
-          <div class="c-item">
-            <div class="c-icon-box"><i class="fas fa-map-marker-alt"></i></div>
-            <div><h4>Location</h4><span>Prayagraj, Uttar Pradesh, India</span></div>
-          </div>
-          <div class="c-item">
-            <div class="c-icon-box"><i class="fas fa-clock"></i></div>
-            <div><h4>Availability</h4><span>Mon–Sat, 10 AM – 7 PM IST</span></div>
-          </div>
+    <section id="contact">
+        <div class="container">
+            <div class="s-header reveal">
+                <div class="s-eyebrow">Let's Talk</div>
+                <h2 class="s-title">Get In <em>Touch</em></h2>
+                <p class="s-sub">Have a project in mind or want to collaborate? I'd love to hear from you.</p>
+            </div>
+            <div class="contact-wrap">
+                <div class="c-left reveal">
+                    <h3>Let's build something solid together.</h3>
+                    <p>Whether it's a fintech platform, SaaS backend, or API architecture — I bring clean code and
+                        practical engineering to every project.</p>
+                    <div class="c-items">
+                        <div class="c-item">
+                            <div class="c-icon-box"><i class="fas fa-envelope"></i></div>
+                            <div>
+                                <h4>Email</h4><a href="mailto:akoffice2026@gmail.com">akoffice2026@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="c-item">
+                            <div class="c-icon-box"><i class="fab fa-linkedin-in"></i></div>
+                            <div>
+                                <h4>LinkedIn</h4><a href="https://www.linkedin.com/in/backend-developer-amit"
+                                    target="_blank">linkedin.com/in/backend-developer-amit</a>
+                            </div>
+                        </div>
+                        <div class="c-item">
+                            <div class="c-icon-box"><i class="fas fa-map-marker-alt"></i></div>
+                            <div>
+                                <h4>Location</h4><span>Prayagraj, Uttar Pradesh, India</span>
+                            </div>
+                        </div>
+                        <div class="c-item">
+                            <div class="c-icon-box"><i class="fas fa-clock"></i></div>
+                            <div>
+                                <h4>Availability</h4><span>Mon–Sat, 10 AM – 7 PM IST</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-card reveal" style="transition-delay:0.15s">
+                    <h3>Send a Message</h3>
+                    <form id="contactForm" action="https://formspree.io/f/xbjndqyv" method="POST">
+                        <div id="formMessage" class="form-msg"></div>
+                        <div class="form-row2">
+                            <div class="fg"><label>Your Name</label><input type="text" name="name"
+                                    placeholder="John Doe" required></div>
+                            <div class="fg"><label>Your Email</label><input type="email" name="email"
+                                    placeholder="john@example.com" required></div>
+                        </div>
+                        <div class="fg"><label>Subject</label><input type="text" name="subject"
+                                placeholder="Project inquiry…" required></div>
+                        <div class="fg"><label>Message</label>
+                            <textarea name="message" placeholder="Tell me about your project…" required></textarea>
+                        </div>
+                        <button type="submit" class="sub-btn" id="submitBtn"><i class="fas fa-paper-plane"></i>
+                            Send Message</button>
+                    </form>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="form-card reveal" style="transition-delay:0.15s">
-        <h3>Send a Message</h3>
-        <form id="contactForm" action="https://formspree.io/f/xbjndqyv" method="POST">
-          <div id="formMessage" class="form-msg"></div>
-          <div class="form-row2">
-            <div class="fg"><label>Your Name</label><input type="text" name="name" placeholder="John Doe" required></div>
-            <div class="fg"><label>Your Email</label><input type="email" name="email" placeholder="john@example.com" required></div>
-          </div>
-          <div class="fg"><label>Subject</label><input type="text" name="subject" placeholder="Project inquiry…" required></div>
-          <div class="fg"><label>Message</label><textarea name="message" placeholder="Tell me about your project…" required></textarea></div>
-          <button type="submit" class="sub-btn" id="submitBtn"><i class="fas fa-paper-plane"></i> Send Message</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- ════════════════════════════════
+    <!-- ════════════════════════════════
      FOOTER
 ════════════════════════════════ -->
-<footer>
-  <div class="container">
-    <div class="foot-wrap">
-      <div class="foot-brand">
-        <h3>Amit Kumar Gupta</h3>
-        <p>Backend developer specializing in Laravel &amp; PHP — building fintech and SaaS platforms that are secure, scalable, and maintainable.</p>
-        <div class="foot-socials">
-          <a href="https://www.linkedin.com/in/backend-developer-amit" target="_blank" class="foot-social" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://github.com/guptakamit304" target="_blank" class="foot-social" aria-label="GitHub"><i class="fab fa-github"></i></a>
-          <a href="mailto:akoffice2026@gmail.com" class="foot-social" aria-label="Email"><i class="fas fa-envelope"></i></a>
+    <footer>
+        <div class="container">
+            <div class="foot-wrap">
+                <div class="foot-brand">
+                    <h3>Amit Kumar Gupta</h3>
+                    <p>Backend developer specializing in Laravel &amp; PHP — building fintech and SaaS platforms that
+                        are secure, scalable, and maintainable.</p>
+                    <div class="foot-socials">
+                        <a href="https://www.linkedin.com/in/backend-developer-amit" target="_blank"
+                            class="foot-social" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://github.com/guptakamit304" target="_blank" class="foot-social"
+                            aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="mailto:akoffice2026@gmail.com" class="foot-social" aria-label="Email"><i
+                                class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="foot-col">
+                    <h4>Navigate</h4>
+                    <ul>
+                        <li><a href="#about">About Me</a></li>
+                        <li><a href="#experience">Experience</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="foot-col">
+                    <h4>Expertise</h4>
+                    <ul>
+                        <li><a href="#">Laravel / PHP</a></li>
+                        <li><a href="#">Fintech APIs</a></li>
+                        <li><a href="#">SaaS Platforms</a></li>
+                        <li><a href="#">MySQL Design</a></li>
+                        <li><a href="#">Role-Based Auth</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="foot-copy">
+                <p>&copy; <span id="year"></span> Amit Kumar Gupta. All rights reserved. Built with precision.</p>
+            </div>
         </div>
-      </div>
-      <div class="foot-col">
-        <h4>Navigate</h4>
-        <ul>
-          <li><a href="#about">About Me</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </div>
-      <div class="foot-col">
-        <h4>Expertise</h4>
-        <ul>
-          <li><a href="#">Laravel / PHP</a></li>
-          <li><a href="#">Fintech APIs</a></li>
-          <li><a href="#">SaaS Platforms</a></li>
-          <li><a href="#">MySQL Design</a></li>
-          <li><a href="#">Role-Based Auth</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="foot-copy">
-      <p>&copy; <span id="year"></span> Amit Kumar Gupta. All rights reserved. Built with precision.</p>
-    </div>
-  </div>
-</footer>
+    </footer>
 
-<a href="#" class="back-top" id="backTop"><i class="fas fa-arrow-up"></i></a>
+    <a href="#" class="back-top" id="backTop"><i class="fas fa-arrow-up"></i></a>
 
-<!-- ═══════════════════════════════════════════
+    <!-- ═══════════════════════════════════════════
      JS
 ═══════════════════════════════════════════ -->
-<script>
-// ── Loader
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    document.getElementById('loader').classList.add('done');
-  }, 1400);
-});
+    <script>
+        // ── Loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('done');
+            }, 1400);
+        });
 
-// ── Cursor glow
-const glow = document.getElementById('cursorGlow');
-document.addEventListener('mousemove', e => {
-  glow.style.left = e.clientX + 'px';
-  glow.style.top = e.clientY + 'px';
-});
+        // ── Cursor glow
+        const glow = document.getElementById('cursorGlow');
+        document.addEventListener('mousemove', e => {
+            glow.style.left = e.clientX + 'px';
+            glow.style.top = e.clientY + 'px';
+        });
 
-// ── Sticky nav
-const nav = document.getElementById('mainNav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.pageYOffset > 60);
-  document.getElementById('backTop').classList.toggle('show', window.pageYOffset > 500);
-});
+        // ── Sticky nav
+        const nav = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.pageYOffset > 60);
+            document.getElementById('backTop').classList.toggle('show', window.pageYOffset > 500);
+        });
 
-// ── Back to top
-document.getElementById('backTop').addEventListener('click', e => {
-  e.preventDefault();
-  window.scrollTo({ top:0, behavior:'smooth' });
-});
+        // ── Back to top
+        document.getElementById('backTop').addEventListener('click', e => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
 
-// ── Year
-document.getElementById('year').textContent = new Date().getFullYear();
+        // ── Year
+        document.getElementById('year').textContent = new Date().getFullYear();
 
-// ── Smooth scroll nav
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const id = a.getAttribute('href');
-    if (id === '#') return;
-    const el = document.querySelector(id);
-    if (el) {
-      e.preventDefault();
-      window.scrollTo({ top: el.offsetTop - 70, behavior: 'smooth' });
-    }
-  });
-});
+        // ── Smooth scroll nav
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                const id = a.getAttribute('href');
+                if (id === '#') return;
+                const el = document.querySelector(id);
+                if (el) {
+                    e.preventDefault();
+                    window.scrollTo({
+                        top: el.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
 
-// ── Scroll reveal
-const reveals = document.querySelectorAll('.reveal');
-const io = new IntersectionObserver((entries) => {
-  entries.forEach((entry, i) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      io.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-reveals.forEach(el => io.observe(el));
+        // ── Scroll reveal
+        const reveals = document.querySelectorAll('.reveal');
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    io.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -40px 0px'
+        });
+        reveals.forEach(el => io.observe(el));
 
-// ── Project filter
-const fBtns = document.querySelectorAll('.f-btn');
-const pCards = document.querySelectorAll('.p-card');
-fBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    fBtns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const f = btn.dataset.filter;
-    pCards.forEach(card => {
-      const show = f === 'all' || card.dataset.category === f;
-      card.style.display = show ? 'flex' : 'none';
-    });
-  });
-});
+        // ── Project filter
+        const fBtns = document.querySelectorAll('.f-btn');
+        const pCards = document.querySelectorAll('.p-card');
+        fBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                fBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const f = btn.dataset.filter;
+                pCards.forEach(card => {
+                    const show = f === 'all' || card.dataset.category === f;
+                    card.style.display = show ? 'flex' : 'none';
+                });
+            });
+        });
 
-// ── Contact form
-const form = document.getElementById('contactForm');
-const msg  = document.getElementById('formMessage');
-const btn  = document.getElementById('submitBtn');
-if (form) {
-  form.addEventListener('submit', async e => {
-    e.preventDefault();
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending…';
-    btn.disabled = true;
-    try {
-      const res = await fetch(form.action, {
-        method:'POST', body:new FormData(form), headers:{'Accept':'application/json'}
-      });
-      if (res.ok) {
-        msg.textContent = '✓ Message sent! I\'ll get back to you soon.';
-        msg.className = 'form-msg ok'; form.reset();
-      } else throw new Error();
-    } catch {
-      msg.textContent = '✗ Something went wrong. Email me directly at akoffice2026@gmail.com';
-      msg.className = 'form-msg err';
-    } finally {
-      btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
-      btn.disabled = false;
-      msg.scrollIntoView({ behavior:'smooth', block:'center' });
-      setTimeout(() => { msg.style.display = 'none'; }, 10000);
-    }
-  });
-}
-</script>
+        // ── Contact form
+        const form = document.getElementById('contactForm');
+        const msg = document.getElementById('formMessage');
+        const btn = document.getElementById('submitBtn');
+        if (form) {
+            form.addEventListener('submit', async e => {
+                e.preventDefault();
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending…';
+                btn.disabled = true;
+                try {
+                    const res = await fetch(form.action, {
+                        method: 'POST',
+                        body: new FormData(form),
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+                    if (res.ok) {
+                        msg.textContent = '✓ Message sent! I\'ll get back to you soon.';
+                        msg.className = 'form-msg ok';
+                        form.reset();
+                    } else throw new Error();
+                } catch {
+                    msg.textContent = '✗ Something went wrong. Email me directly at akoffice2026@gmail.com';
+                    msg.className = 'form-msg err';
+                } finally {
+                    btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+                    btn.disabled = false;
+                    msg.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                    setTimeout(() => {
+                        msg.style.display = 'none';
+                    }, 10000);
+                }
+            });
+        }
+    </script>
 </body>
+
 </html>
