@@ -942,12 +942,18 @@ async function sendMessage(){
   btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Sending…';
   btn.disabled=true;msg.style.display='none';msg.className='form-msg';
   try{
-    const res=await fetch('https://formspree.io/f/xbjndqyv',{
+    const formData=new FormData();
+    formData.append('access_key','65791336-99f2-4a07-b43f-e6304e69c48e');
+    formData.append('name',name);
+    formData.append('email',email);
+    formData.append('subject',subject);
+    formData.append('message',message);
+    const res=await fetch('https://api.web3forms.com/submit',{
       method:'POST',
-      headers:{'Content-Type':'application/json','Accept':'application/json'},
-      body:JSON.stringify({name,email,subject,message})
+      body:formData
     });
-    if(res.ok){
+    const data=await res.json();
+    if(res.ok&&data.success){
       msg.textContent='✓ Message sent! I\'ll get back to you soon.';
       msg.className='form-msg ok';
       document.getElementById('f-name').value='';
@@ -955,9 +961,7 @@ async function sendMessage(){
       document.getElementById('f-subject').value='';
       document.getElementById('f-message').value='';
     }else{
-      const data=await res.json();
-      const errMsg=data&&data.errors?data.errors.map(e=>e.message).join(', '):'Something went wrong.';
-      msg.textContent='✗ '+errMsg+' Email me at akoffice2026@gmail.com';
+      msg.textContent='✗ '+(data.message||'Something went wrong.')+' Email me at akoffice2026@gmail.com';
       msg.className='form-msg err';
     }
   }catch(e){
